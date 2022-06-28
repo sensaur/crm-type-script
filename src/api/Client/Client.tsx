@@ -5,7 +5,7 @@ class Client {
 
   // eslint-disable-next-line class-methods-use-this
   encodeObject(obj: any) {
-    const filters: any = [];
+    const filters: string[] = [];
     if (obj) {
       Object.keys(obj).forEach((k) => {
         const value = obj[k];

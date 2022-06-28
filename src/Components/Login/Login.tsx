@@ -23,11 +23,11 @@ function Login() {
     setState((prev: User) => ({ ...prev, [name]: value }));
   };
 
-  const error = (r: any) => {
+  const error = (r: Response) => {
     setState((prev: User) => ({ ...prev, showErrorMessage: true }));
     console.log('еррор', r);
   };
-  const success = (r: any) => {
+  const success = (r: Response) => {
     console.log('саксесс', r);
   };
 
@@ -37,8 +37,8 @@ function Login() {
   } = state;
 
   const submitHandler = () => {
-    let status: any;
-    APIClient.fetchAuthToken(login, password).then((r: any) => {
+    let status: number;
+    APIClient.fetchAuthToken(login, password).then((r: Response) => {
       status = r.status;
       return r.json();
     }).then((r) => {
