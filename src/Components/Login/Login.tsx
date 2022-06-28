@@ -1,9 +1,13 @@
 import { ChangeEvent, useState } from 'react';
+import { Alert } from 'reactstrap';
+import APIClient from '../../api/Client/Client';
+import POSITIVE_ACTION_STATUSES from '../../api/Client/PAStatuses';
 
 interface User {
   login: string;
   password: string;
   showErrorMessage: boolean;
+  errorMessages: object,
 }
 
 function Login() {
@@ -11,6 +15,7 @@ function Login() {
     login: '',
     password: '',
     showErrorMessage: false,
+    errorMessages: {},
   });
 
   const inputHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -18,11 +23,31 @@ function Login() {
     setState((prev: User) => ({ ...prev, [name]: value }));
   };
 
-  const submitHandler = () => {
-    console.log('privetiki iz SubmitHandler');
+  const error = (r: any) => {
+    setState((prev: User) => ({ ...prev, showErrorMessage: true }));
+    console.log('еррор', r);
+  };
+  const success = (r: any) => {
+    console.log('саксесс', r);
   };
 
-  const { login, password } = state;
+  const {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    login, password, showErrorMessage, errorMessages,
+  } = state;
+
+  const submitHandler = () => {
+    let status: any;
+    APIClient.fetchAuthToken(login, password).then((r: any) => {
+      status = r.status;
+      return r.json();
+    }).then((r) => {
+      if (status === POSITIVE_ACTION_STATUSES.retrieve) { return success(r); }
+      return error(r);
+    });
+  };
+
+  // console.log({ errorMessages, error, success });
 
   return (
     <div className="flex-row align-items-center py-5">
@@ -73,6 +98,15 @@ function Login() {
         </div>
         <div className="row justify-content-center">
           <div className="col-md-4" />
+          {showErrorMessage
+            ? (
+              <Alert color="warning">
+                <strong>Ошибка!</strong>
+                {' '}
+                Не удалось войти
+              </Alert>
+            )
+            : ''}
         </div>
       </div>
     </div>
