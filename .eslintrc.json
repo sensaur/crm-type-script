@@ -36,6 +36,7 @@
     "react/react-in-jsx-scope": 0,
     "quotes": 0,
     "semi": 0,
+    "no-console": 0,
     "import/extensions": [
       "error",
       "ignorePackages",
