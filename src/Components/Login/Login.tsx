@@ -61,7 +61,7 @@ function Login() {
                   <form action="" onSubmit={submitHandler}>
                     <h1>Вход</h1>
                     <div className="input-group mb-3">
-                      <span className="input-group-addon"><i className="icon-user" /></span>
+                      <span className="input-group-sm mx-lg-2"><i className="icon-user align-bottom" /></span>
                       <input
                         type="text"
                         className="form-control"
@@ -71,8 +71,8 @@ function Login() {
                         onChange={inputHandler}
                       />
                     </div>
-                    <div className="input-group mb-4">
-                      <span className="input-group-addon"><i className="icon-lock" /></span>
+                    <div className="input-group mb-3">
+                      <span className="input-group-sm mx-lg-2"><i className="icon-lock align-bottom" /></span>
                       <input
                         type="password"
                         className="form-control"
@@ -98,18 +98,18 @@ function Login() {
               </div>
             </div>
           </div>
-        </div>
-        <div className="row justify-content-center">
-          <div className="col-md-4" />
-          {showErrorMessage
-            ? (
-              <Alert color="warning">
-                <strong>Ошибка!</strong>
-                {' '}
-                Не удалось войти
-              </Alert>
-            )
-            : ''}
+          <div className="row justify-content-center">
+            <div className="col-md-4" />
+            {showErrorMessage
+              ? (
+                <Alert color="warning">
+                  <strong>Ошибка!</strong>
+                  {' '}
+                  Не удалось войти
+                </Alert>
+              )
+              : ''}
+          </div>
         </div>
       </div>
     </div>
