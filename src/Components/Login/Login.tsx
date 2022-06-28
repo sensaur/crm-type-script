@@ -36,7 +36,8 @@ function Login() {
     login, password, showErrorMessage, errorMessages,
   } = state;
 
-  const submitHandler = () => {
+  const submitHandler = (e: any) => {
+    e.preventDefault();
     let status: number;
     APIClient.fetchAuthToken(login, password).then((r: Response) => {
       status = r.status;
@@ -57,40 +58,42 @@ function Login() {
             <div className="card-group mb-0">
               <div className="card p-4">
                 <div className="card-block">
-                  <h1>Вход</h1>
-                  <div className="input-group mb-3">
-                    <span className="input-group-addon"><i className="icon-user" /></span>
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Логин"
-                      name="login"
-                      value={login}
-                      onChange={inputHandler}
-                    />
-                  </div>
-                  <div className="input-group mb-4">
-                    <span className="input-group-addon"><i className="icon-lock" /></span>
-                    <input
-                      type="password"
-                      className="form-control"
-                      placeholder="Пароль"
-                      name="password"
-                      value={password}
-                      onChange={inputHandler}
-                    />
-                  </div>
-                  <div className="row">
-                    <div className="col-6">
-                      <button
-                        type="button"
-                        className="btn btn-primary px-4"
-                        onClick={submitHandler}
-                      >
-                        Войти
-                      </button>
+                  <form action="" onSubmit={submitHandler}>
+                    <h1>Вход</h1>
+                    <div className="input-group mb-3">
+                      <span className="input-group-addon"><i className="icon-user" /></span>
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Логин"
+                        name="login"
+                        value={login}
+                        onChange={inputHandler}
+                      />
                     </div>
-                  </div>
+                    <div className="input-group mb-4">
+                      <span className="input-group-addon"><i className="icon-lock" /></span>
+                      <input
+                        type="password"
+                        className="form-control"
+                        placeholder="Пароль"
+                        name="password"
+                        autoComplete="on"
+                        value={password}
+                        onChange={inputHandler}
+                      />
+                    </div>
+                    <div className="row">
+                      <div className="col-6">
+                        <button
+                          type="submit"
+                          className="btn btn-primary px-4"
+                        >
+                          Войти
+                        </button>
+                      </div>
+                    </div>
+                  </form>
                 </div>
               </div>
             </div>
