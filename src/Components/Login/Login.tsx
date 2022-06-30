@@ -2,12 +2,18 @@ import { ChangeEvent, useState } from 'react';
 import { Alert } from 'reactstrap';
 import APIClient from '../../api/Client/Client';
 import POSITIVE_ACTION_STATUSES from '../../api/Client/PAStatuses';
+import { pushToken } from '../../connect/auth';
 
 interface User {
   login: string;
   password: string;
   showErrorMessage: boolean;
   errorMessages: object,
+}
+
+interface Token {
+  access: string;
+  refresh: string;
 }
 
 function Login() {
@@ -27,8 +33,9 @@ function Login() {
     setState((prev: User) => ({ ...prev, showErrorMessage: true }));
     console.log('еррор', r);
   };
-  const success = (r: Response) => {
+  const success = (r: Token) => {
     console.log('саксесс', r);
+    pushToken(r.access);
   };
 
   const {
