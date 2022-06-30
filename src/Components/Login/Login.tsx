@@ -42,8 +42,7 @@ function Login() {
   };
 
   const {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    login, password, showErrorMessage, errorMessages,
+    login, password, showErrorMessage,
   } = state;
 
   const submitHandler = (e: any) => {
@@ -52,13 +51,11 @@ function Login() {
     APIClient.fetchAuthToken(login, password).then((r: Response) => {
       status = r.status;
       return r.json();
-    }).then((r) => {
+    }).then((r: any) => {
       if (status === POSITIVE_ACTION_STATUSES.retrieve) { return success(r); }
       return error(r);
     });
   };
-
-  // console.log({ errorMessages, error, success });
 
   return (
     <div className="flex-row align-items-center py-5">

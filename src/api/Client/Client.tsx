@@ -1,8 +1,4 @@
 class Client {
-  // constructor(resource_url) {
-  //   this.resource_url = resource_url;
-  // }
-
   // eslint-disable-next-line class-methods-use-this
   encodeObject(obj: any) {
     const filters: string[] = [];
@@ -32,8 +28,19 @@ class Client {
     });
     return response;
   }
+
+  // fetchOffices() {
+  //   console.log('q131231');
+  //
+  // //   return fetch(`/frontend/api/users/offices/`, {
+  // //     headers: {
+  // //       'Accept': 'application/json',
+  // //       'Authorization': `JWT ${fetchToken()}`,
+  // //     },
+  // //   });
+  //
+  // }
 }
 
 const APIClient = new Client();
-
 export default APIClient;

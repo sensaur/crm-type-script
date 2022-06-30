@@ -40,6 +40,23 @@ function Officein() {
     setState((prev: ArrayObjectSelectState) => ({ ...prev, selectedAnimal: option }));
   };
 
+  // const handleOptionLoad = () => {
+  // let status;
+  // UsersAPI
+  //   .fetchOffices()
+  //   .then((r) => {
+  //     status = r.status;
+  //     return r.json();
+  //   })
+  //   .then((r) => {
+  //     if (status === POSITIVE_ACTION_STATUSES.retrieve) {
+  //       this.setState({
+  //         offices: r || [],
+  //       });
+  //     }
+  //   });
+  // };
+
   return (
     <div className="flex-row align-items-center py-5">
       <div className="container">
