@@ -1,5 +1,6 @@
 import { ChangeEvent, useState } from 'react';
 import { Alert } from 'reactstrap';
+import { useNavigate } from 'react-router-dom';
 import APIClient from '../../api/Client/Client';
 import POSITIVE_ACTION_STATUSES from '../../api/Client/PAStatuses';
 import { pushToken } from '../../connect/auth';
@@ -17,6 +18,7 @@ interface Token {
 }
 
 function Login() {
+  const navigate = useNavigate();
   const [state, setState] = useState<User>({
     login: '',
     password: '',
@@ -36,6 +38,7 @@ function Login() {
   const success = (r: Token) => {
     console.log('саксесс', r);
     pushToken(r.access);
+    navigate('officein');
   };
 
   const {
