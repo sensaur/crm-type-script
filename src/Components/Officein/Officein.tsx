@@ -16,6 +16,7 @@ interface ArrayObjectSelectState {
 }
 
 function Officein() {
+  console.log('Office rerendered');
   const [state, setState] = useState<ArrayObjectSelectState>({
     selectedOffice: null,
     offices: [],
