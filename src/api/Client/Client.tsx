@@ -31,6 +31,7 @@ class Client {
 
   // fetchOffices() {
   //   console.log('q131231');
+  //   console.log(this);
   //
   // //   return fetch(`/frontend/api/users/offices/`, {
   // //     headers: {
@@ -43,4 +44,5 @@ class Client {
 }
 
 const APIClient = new Client();
+// console.log(APIClient.fetchOffices());
 export default APIClient;

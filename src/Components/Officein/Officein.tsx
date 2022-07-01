@@ -1,61 +1,55 @@
 import Select from 'react-select';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { fetchToken } from '../../connect/auth';
+import POSITIVE_ACTION_STATUSES from '../../api/Client/PAStatuses';
 
-interface Animal {
-  name: string;
-  type: string;
-  age: number;
+interface Office {
+  address: string
+  fp_type: string
+  id: number
+  name: string
 }
 
 interface ArrayObjectSelectState {
-  selectedAnimal: Animal | null
+  selectedOffice: Office | null
+  offices: []
 }
 
 function Officein() {
-  const animals: Animal[] = [
-    {
-      name: 'Tom',
-      type: 'dinosaur',
-      age: 25,
-    },
-    {
-      name: 'Alfred',
-      type: 'turtle',
-      age: 12,
-    },
-    {
-      name: 'Jeff',
-      type: 'snail',
-      age: 19,
-    },
-  ];
-
   const [state, setState] = useState<ArrayObjectSelectState>({
-    selectedAnimal: null,
+    selectedOffice: null,
+    offices: [],
   });
 
-  const handleChange = (option: Animal | null) => {
-    console.log(option);
-    console.log(typeof option);
-    setState((prev: ArrayObjectSelectState) => ({ ...prev, selectedAnimal: option }));
+  const { offices } = state;
+
+  const handleChange = (option: Office | null) => {
+    // console.log(option);
+    // console.log(typeof option);
+    setState((prev: ArrayObjectSelectState) => ({ ...prev, selectedOffice: option }));
   };
 
-  // const handleOptionLoad = () => {
-  // let status;
-  // UsersAPI
-  //   .fetchOffices()
-  //   .then((r) => {
-  //     status = r.status;
-  //     return r.json();
-  //   })
-  //   .then((r) => {
-  //     if (status === POSITIVE_ACTION_STATUSES.retrieve) {
-  //       this.setState({
-  //         offices: r || [],
-  //       });
-  //     }
-  //   });
-  // };
+  const fetchOffices = () => {
+    let status: number;
+    fetch('/frontend/api/users/offices/', {
+      headers: {
+        Accept: 'application/json',
+        Authorization: `JWT ${fetchToken()}`,
+      },
+    })
+      .then((r) => {
+        status = r.status;
+        return r.json();
+      })
+      .then((r) => {
+        if (status === POSITIVE_ACTION_STATUSES.retrieve) {
+          console.log(r);
+          setState((prev: ArrayObjectSelectState) => ({ ...prev, offices: r || [] }));
+        }
+      });
+  };
+
+  useEffect(() => fetchOffices, []);
 
   return (
     <div className="flex-row align-items-center py-5">
@@ -72,10 +66,10 @@ function Officein() {
                     />
                     <Select
                       className="py-2"
-                      value={state.selectedAnimal}
-                      getOptionLabel={(animal: Animal) => animal.name}
-                      getOptionValue={(animal: Animal) => animal.type}
-                      options={animals}
+                      value={state.selectedOffice}
+                      getOptionLabel={(office: Office) => office.address}
+                      getOptionValue={(office: Office) => office.address}
+                      options={offices}
                       isClearable
                       backspaceRemovesValue
                       onChange={handleChange}
