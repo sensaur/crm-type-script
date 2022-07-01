@@ -2,6 +2,7 @@ import Select from 'react-select';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { fetchToken } from '../../connect/auth';
+import { GET_OFFICES } from '../../urls/urls';
 
 interface Office {
   address: string
@@ -30,7 +31,7 @@ function Officein() {
 
   const fetchOffices = async () => {
     try {
-      const response = await axios.get('/frontend/api/users/offices/', {
+      const response = await axios.get(GET_OFFICES, {
         headers: {
           Accept: 'application/json',
           Authorization: `JWT ${fetchToken()}`,

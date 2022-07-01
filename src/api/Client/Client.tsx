@@ -1,3 +1,5 @@
+import { LOGIN } from '../../urls/urls';
+
 class Client {
   // eslint-disable-next-line class-methods-use-this
   encodeObject(obj: any) {
@@ -18,7 +20,7 @@ class Client {
   }
 
   async fetchAuthToken(login: string, password: string) {
-    const response: Response = await fetch('/frontend/api/auth/', {
+    const response: Response = await fetch(LOGIN, {
       method: 'post',
       headers: {
         Accept: 'application/json',
