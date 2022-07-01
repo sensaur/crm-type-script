@@ -1,5 +1,6 @@
 import Select from 'react-select';
 import { useState, useEffect } from 'react';
+// import axios from 'axios';
 import { fetchToken } from '../../connect/auth';
 
 interface Office {
@@ -27,6 +28,18 @@ function Officein() {
   };
 
   const fetchOffices = async () => {
+    // try {
+    //   const response = await axios.get('/frontend/api/users/offices/', {
+    //     headers: {
+    //       Accept: 'application/json',
+    //       Authorization: `JWT ${fetchToken()}`,
+    //     },
+    //   });
+    //   setState((prev: ArrayObjectSelectState) => ({ ...prev, offices: response?.data || [] }));
+    // } catch (error) {
+    //   console.error('error', error);
+    // }
+
     const url = '/frontend/api/users/offices/';
     const response = await fetch(url, {
       headers: {
@@ -41,6 +54,10 @@ function Officein() {
   };
 
   useEffect(() => { fetchOffices(); }, []);
+
+  // useEffect(() => { fetchOffices(); }, []);
+  // useEffect(() => { fetchOffices(); }, []);
+  console.log('state', state);
 
   return (
     <div className="flex-row align-items-center py-5">
