@@ -28,25 +28,24 @@ function Officein() {
     setState((prev: ArrayObjectSelectState) => ({ ...prev, selectedOffice: option }));
   };
 
-  const fetchOffices = () => {
+  const fetchOffices = async () => {
     try {
-      axios.get('/frontend/api/users/offices/', {
+      const response = await axios.get('/frontend/api/users/offices/', {
         headers: {
           Accept: 'application/json',
           Authorization: `JWT ${fetchToken()}`,
         },
-      })
-        .then((response) => {
-          setState((prev: ArrayObjectSelectState) => ({ ...prev, offices: response?.data || [] }));
-        });
+      });
+      setState((prev: ArrayObjectSelectState) => ({ ...prev, offices: response?.data || [] }));
     } catch (error) {
       console.error('error', error);
     }
   };
 
-  useEffect(() => fetchOffices, []);
-
-  // console.log('state', state);
+  useEffect(() => {
+    const resolve = async () => { await fetchOffices(); };
+    resolve();
+  }, []);
 
   return (
     <div className="flex-row align-items-center py-5">
