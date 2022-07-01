@@ -43,8 +43,9 @@ function Officein() {
   };
 
   useEffect(() => {
-    const resolve = async () => { await fetchOffices(); };
-    resolve();
+    // const resolve = async () => { await fetchOffices(); };
+    // resolve();
+    (async function resolve() { await fetchOffices(); }());
   }, []);
 
   return (
