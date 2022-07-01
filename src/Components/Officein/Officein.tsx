@@ -24,8 +24,6 @@ function Officein() {
   const { offices } = state;
 
   const handleChange = (option: Office | null) => {
-    // console.log(option);
-    // console.log(typeof option);
     setState((prev: ArrayObjectSelectState) => ({ ...prev, selectedOffice: option }));
   };
 
