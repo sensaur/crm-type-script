@@ -1,3 +1,4 @@
+import axios, { AxiosResponse } from 'axios';
 import { LOGIN } from '../../urls/urls';
 
 class Client {
@@ -20,13 +21,14 @@ class Client {
   }
 
   async fetchAuthToken(login: string, password: string) {
-    const response: Response = await fetch(LOGIN, {
+    const response: AxiosResponse = await axios({
+      url: LOGIN,
       method: 'post',
       headers: {
         Accept: 'application/json',
         'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
       },
-      body: this.encodeObject({ username: login, password }),
+      data: this.encodeObject({ username: login, password }),
     });
     return response;
   }

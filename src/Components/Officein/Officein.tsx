@@ -17,7 +17,6 @@ interface ArrayObjectSelectState {
 }
 
 function Officein() {
-  // console.log('Office rerendered');
   const [state, setState] = useState<ArrayObjectSelectState>({
     selectedOffice: null,
     offices: [],
@@ -44,8 +43,6 @@ function Officein() {
   };
 
   useEffect(() => {
-    // const resolve = async () => { await fetchOffices(); };
-    // resolve();
     (async function resolve() { await fetchOffices(); }());
   }, []);
 

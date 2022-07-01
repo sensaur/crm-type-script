@@ -2,14 +2,13 @@ import { ChangeEvent, useState } from 'react';
 import { Alert } from 'reactstrap';
 import { useNavigate } from 'react-router-dom';
 import APIClient from '../../api/Client/Client';
-import POSITIVE_ACTION_STATUSES from '../../api/Client/PAStatuses';
 import { pushToken } from '../../connect/auth';
 
 interface User {
   login: string;
   password: string;
   showErrorMessage: boolean;
-  errorMessages: object,
+  errorMessage: string,
 }
 
 interface Token {
@@ -18,13 +17,12 @@ interface Token {
 }
 
 function Login() {
-  // console.log('Login rerendered');
   const navigate = useNavigate();
   const [state, setState] = useState<User>({
     login: '',
     password: '',
     showErrorMessage: false,
-    errorMessages: {},
+    errorMessage: '',
   });
 
   const inputHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -32,12 +30,13 @@ function Login() {
     setState((prev: User) => ({ ...prev, [name]: value }));
   };
 
-  const error = (r: Response) => {
+  const onError = (r: any) => {
+    setState((prev: User) => ({ ...prev, errorMessage: r.response.data.detail }));
     setState((prev: User) => ({ ...prev, showErrorMessage: true }));
-    console.log('еррор', r);
+    // console.log('еррор', r);
   };
   const success = (r: Token) => {
-    console.log('саксесс', r);
+    // console.log('саксесс', r);
     pushToken(r.access);
     navigate('officein');
   };
@@ -48,16 +47,11 @@ function Login() {
 
   const submitHandler = (e: any) => {
     e.preventDefault();
-    let status: number;
     APIClient.fetchAuthToken(login, password)
-      .then((r: Response) => {
-        status = r.status;
-        return r.json();
+      .catch((error) => {
+        onError(error);
       })
-      .then((r: any) => {
-        if (status === POSITIVE_ACTION_STATUSES.retrieve) { return success(r); }
-        return error(r);
-      });
+      .then((r: any) => success(r.data));
   };
 
   return (
@@ -116,6 +110,8 @@ function Login() {
                   <strong>Ошибка!</strong>
                   {' '}
                   Не удалось войти
+                  {' '}
+                  {state.errorMessage}
                 </Alert>
               )
               : ''}
