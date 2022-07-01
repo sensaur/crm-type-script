@@ -1,6 +1,6 @@
 import Select from 'react-select';
 import { useState, useEffect } from 'react';
-// import axios from 'axios';
+import axios from 'axios';
 import { fetchToken } from '../../connect/auth';
 
 interface Office {
@@ -16,7 +16,7 @@ interface ArrayObjectSelectState {
 }
 
 function Officein() {
-  console.log('Office rerendered');
+  // console.log('Office rerendered');
   const [state, setState] = useState<ArrayObjectSelectState>({
     selectedOffice: null,
     offices: [],
@@ -28,37 +28,25 @@ function Officein() {
     setState((prev: ArrayObjectSelectState) => ({ ...prev, selectedOffice: option }));
   };
 
-  const fetchOffices = async () => {
-    // try {
-    //   const response = await axios.get('/frontend/api/users/offices/', {
-    //     headers: {
-    //       Accept: 'application/json',
-    //       Authorization: `JWT ${fetchToken()}`,
-    //     },
-    //   });
-    //   setState((prev: ArrayObjectSelectState) => ({ ...prev, offices: response?.data || [] }));
-    // } catch (error) {
-    //   console.error('error', error);
-    // }
-
-    const url = '/frontend/api/users/offices/';
-    const response = await fetch(url, {
-      headers: {
-        Accept: 'application/json',
-        Authorization: `JWT ${fetchToken()}`,
-      },
-    });
-    if (response.ok) {
-      const json = await response.json();
-      setState((prev: ArrayObjectSelectState) => ({ ...prev, offices: json || [] }));
+  const fetchOffices = () => {
+    try {
+      axios.get('/frontend/api/users/offices/', {
+        headers: {
+          Accept: 'application/json',
+          Authorization: `JWT ${fetchToken()}`,
+        },
+      })
+        .then((response) => {
+          setState((prev: ArrayObjectSelectState) => ({ ...prev, offices: response?.data || [] }));
+        });
+    } catch (error) {
+      console.error('error', error);
     }
   };
 
-  useEffect(() => { fetchOffices(); }, []);
+  useEffect(() => fetchOffices, []);
 
-  // useEffect(() => { fetchOffices(); }, []);
-  // useEffect(() => { fetchOffices(); }, []);
-  console.log('state', state);
+  // console.log('state', state);
 
   return (
     <div className="flex-row align-items-center py-5">

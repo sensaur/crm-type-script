@@ -18,7 +18,7 @@ interface Token {
 }
 
 function Login() {
-  console.log('Login rerendered');
+  // console.log('Login rerendered');
   const navigate = useNavigate();
   const [state, setState] = useState<User>({
     login: '',
