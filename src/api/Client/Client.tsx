@@ -28,21 +28,7 @@ class Client {
     });
     return response;
   }
-
-  // fetchOffices() {
-  //   console.log('q131231');
-  //   console.log(this);
-  //
-  // //   return fetch(`/frontend/api/users/offices/`, {
-  // //     headers: {
-  // //       'Accept': 'application/json',
-  // //       'Authorization': `JWT ${fetchToken()}`,
-  // //     },
-  // //   });
-  //
-  // }
 }
 
 const APIClient = new Client();
-// console.log(APIClient.fetchOffices());
 export default APIClient;

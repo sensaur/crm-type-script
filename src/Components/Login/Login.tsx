@@ -48,13 +48,15 @@ function Login() {
   const submitHandler = (e: any) => {
     e.preventDefault();
     let status: number;
-    APIClient.fetchAuthToken(login, password).then((r: Response) => {
-      status = r.status;
-      return r.json();
-    }).then((r: any) => {
-      if (status === POSITIVE_ACTION_STATUSES.retrieve) { return success(r); }
-      return error(r);
-    });
+    APIClient.fetchAuthToken(login, password)
+      .then((r: Response) => {
+        status = r.status;
+        return r.json();
+      })
+      .then((r: any) => {
+        if (status === POSITIVE_ACTION_STATUSES.retrieve) { return success(r); }
+        return error(r);
+      });
   };
 
   return (
