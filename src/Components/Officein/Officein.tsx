@@ -1,7 +1,7 @@
 import Select from 'react-select';
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import { fetchToken } from '../../connect/auth';
-import POSITIVE_ACTION_STATUSES from '../../api/Client/PAStatuses';
+// import POSITIVE_ACTION_STATUSES from '../../api/Client/PAStatuses';
 
 interface Office {
   address: string
@@ -27,27 +27,21 @@ function Officein() {
     setState((prev: ArrayObjectSelectState) => ({ ...prev, selectedOffice: option }));
   };
 
-  const fetchOffices = () => {
-    let status: number;
-    fetch('/frontend/api/users/offices/', {
+  const fetchOffices = async () => {
+    const url = '/frontend/api/users/offices/';
+    const response = await fetch(url, {
       headers: {
         Accept: 'application/json',
         Authorization: `JWT ${fetchToken()}`,
       },
-    })
-      .then((r) => {
-        status = r.status;
-        return r.json();
-      })
-      .then((r) => {
-        if (status === POSITIVE_ACTION_STATUSES.retrieve) {
-          console.log(r);
-          setState((prev: ArrayObjectSelectState) => ({ ...prev, offices: r || [] }));
-        }
-      });
+    });
+    if (response.ok) {
+      const json = await response.json();
+      setState((prev: ArrayObjectSelectState) => ({ ...prev, offices: json || [] }));
+    }
   };
 
-  useEffect(() => fetchOffices, []);
+  useEffect(() => { fetchOffices(); }, []);
 
   return (
     <div className="flex-row align-items-center py-5">
