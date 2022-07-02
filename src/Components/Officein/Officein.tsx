@@ -1,7 +1,8 @@
 import Select from 'react-select';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { getTokenFromLocalStorage } from '../../connect/auth';
+import { useNavigate } from 'react-router-dom';
+import { getTokenFromLocalStorage, getUserInfo } from '../../connect/auth';
 import { GET_OFFICES } from '../../urls/urls';
 
 interface Office {
@@ -17,6 +18,9 @@ interface ArrayObjectSelectState {
 }
 
 function Officein() {
+  const navigate = useNavigate();
+  const userInfo = getUserInfo();
+
   const [state, setState] = useState<ArrayObjectSelectState>({
     selectedOffice: null,
     offices: [],
@@ -45,6 +49,13 @@ function Officein() {
   useEffect(() => {
     (async function resolve() { await fetchOffices(); }());
   }, []);
+
+  useEffect(() => {
+    if (userInfo === null) {
+      navigate('/login', { replace: true });
+    }
+  //   } else navigate('/');
+  }, [userInfo]);
 
   return (
     <div className="flex-row align-items-center py-5">

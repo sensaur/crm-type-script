@@ -43,7 +43,7 @@ function Login() {
   const success = (r: Token) => {
     // console.log('саксесс', r);
     pushToken(r.access);
-    navigate('officein');
+    navigate('/officein', { replace: true });
   };
 
   const {
@@ -61,17 +61,18 @@ function Login() {
   };
 
   if (!localStorage.getItem('auth')) {
-    console.log(localStorage);
+    // console.log(localStorage);
     localStorage.clear();
     localStorage.setItem('auth', '1');
-    console.log(localStorage);
+    // console.log(localStorage);
   }
 
   const userInfo = getUserInfo();
-  console.log('userInfoFROMLOGIN==>', userInfo);
+  // console.log('userInfoFROMLOGIN==>', userInfo);
   useEffect(() => {
+    // console.log('!userInfo=>>', !userInfo);
     if (!!userInfo && checkTokenExpirationDate(userInfo.exp)) {
-      navigate('officein');
+      navigate('/officein', { replace: true });
     }
   }, [userInfo]);
 
