@@ -21,3 +21,7 @@ export function getUserInfo() {
     return null;
   }
 }
+
+export function checkTokenExpirationDate(timestamp: any) {
+  return timestamp > (new Date().getTime() / 1000);
+}

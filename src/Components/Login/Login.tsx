@@ -1,8 +1,10 @@
-import { ChangeEvent, useState, FormEvent } from 'react';
+import {
+  ChangeEvent, useState, FormEvent, useEffect,
+} from 'react';
 import { Alert } from 'reactstrap';
 import { useNavigate } from 'react-router-dom';
 import { AxiosError, AxiosResponse } from 'axios';
-import { pushToken, getUserInfo } from '../../connect/auth';
+import { pushToken, getUserInfo, checkTokenExpirationDate } from '../../connect/auth';
 import APIClient from '../../api/Client/Client';
 
 interface User {
@@ -34,6 +36,9 @@ function Login() {
   const onError = (error: string) => {
     setState((prev: User) => ({ ...prev, errorMessage: error }));
     setState((prev: User) => ({ ...prev, showErrorMessage: true }));
+    setTimeout(() => {
+      setState((prev: User) => ({ ...prev, showErrorMessage: false }));
+    }, 3e3);
   };
   const success = (r: Token) => {
     // console.log('саксесс', r);
@@ -63,7 +68,13 @@ function Login() {
   }
 
   const userInfo = getUserInfo();
-  console.log('userInfo==>', userInfo);
+  // console.log('userInfo==>', userInfo);
+  useEffect(() => {
+    // @ts-ignore
+    if (!!userInfo && checkTokenExpirationDate(userInfo.exp)) {
+      navigate('officein');
+    }
+  }, [userInfo]);
 
   return (
     <div className="flex-row align-items-center py-5">
@@ -113,20 +124,21 @@ function Login() {
               </div>
             </div>
           </div>
-          <div className="row justify-content-center">
-            <div className="col-md-4" />
-            {showErrorMessage
-              ? (
-                <Alert color="warning">
-                  <strong>Ошибка!</strong>
-                  {' '}
-                  Не удалось войти
-                  {' '}
+        </div>
+        <div className="row justify-content-center">
+          <div className="py-2" />
+          {showErrorMessage
+            ? (
+              <Alert className="col-md-4" color="warning">
+                <strong>Ошибка!</strong>
+                {' '}
+                Не удалось войти
+                <div>
                   {state.errorMessage}
-                </Alert>
-              )
-              : ''}
-          </div>
+                </div>
+              </Alert>
+            )
+            : ''}
         </div>
       </div>
     </div>
