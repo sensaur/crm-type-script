@@ -2,7 +2,7 @@ import { ChangeEvent, useState, FormEvent } from 'react';
 import { Alert } from 'reactstrap';
 import { useNavigate } from 'react-router-dom';
 import { AxiosError, AxiosResponse } from 'axios';
-import { pushToken } from '../../connect/auth';
+import { pushToken, getUserInfo } from '../../connect/auth';
 import APIClient from '../../api/Client/Client';
 
 interface User {
@@ -54,6 +54,16 @@ function Login() {
         onError(data.detail);
       });
   };
+
+  if (!localStorage.getItem('auth')) {
+    console.log(localStorage);
+    localStorage.clear();
+    localStorage.setItem('auth', '1');
+    console.log(localStorage);
+  }
+
+  const userInfo = getUserInfo();
+  console.log('userInfo==>', userInfo);
 
   return (
     <div className="flex-row align-items-center py-5">
