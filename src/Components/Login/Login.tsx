@@ -68,9 +68,8 @@ function Login() {
   }
 
   const userInfo = getUserInfo();
-  // console.log('userInfo==>', userInfo);
+  console.log('userInfoFROMLOGIN==>', userInfo);
   useEffect(() => {
-    // @ts-ignore
     if (!!userInfo && checkTokenExpirationDate(userInfo.exp)) {
       navigate('officein');
     }
