@@ -1,7 +1,7 @@
 import Select from 'react-select';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { fetchToken } from '../../connect/auth';
+import { getTokenFromLocalStorage } from '../../connect/auth';
 import { GET_OFFICES } from '../../urls/urls';
 
 interface Office {
@@ -33,7 +33,7 @@ function Officein() {
       const response = await axios.get(GET_OFFICES, {
         headers: {
           Accept: 'application/json',
-          Authorization: `JWT ${fetchToken()}`,
+          Authorization: `JWT ${getTokenFromLocalStorage()}`,
         },
       });
       setState((prev: ArrayObjectSelectState) => ({ ...prev, offices: response?.data || [] }));

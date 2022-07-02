@@ -20,7 +20,7 @@ class Client {
     return `&${filters.join('&')}`;
   }
 
-  async fetchAuthToken(login: string, password: string) {
+  async fetchAuthTokenFromServer(login: string, password: string) {
     const response: AxiosResponse = await axios({
       url: AUTH,
       method: 'post',

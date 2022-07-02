@@ -1,6 +1,7 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useState, FormEvent } from 'react';
 import { Alert } from 'reactstrap';
 import { useNavigate } from 'react-router-dom';
+import { AxiosError, AxiosResponse } from 'axios';
 import { pushToken } from '../../connect/auth';
 import APIClient from '../../api/Client/Client';
 
@@ -30,10 +31,9 @@ function Login() {
     setState((prev: User) => ({ ...prev, [name]: value }));
   };
 
-  const onError = (r: any) => {
-    setState((prev: User) => ({ ...prev, errorMessage: r.response.data.detail }));
+  const onError = (error: string) => {
+    setState((prev: User) => ({ ...prev, errorMessage: error }));
     setState((prev: User) => ({ ...prev, showErrorMessage: true }));
-    // console.log('еррор', r);
   };
   const success = (r: Token) => {
     // console.log('саксесс', r);
@@ -45,13 +45,14 @@ function Login() {
     login, password, showErrorMessage,
   } = state;
 
-  const submitHandler = (e: any) => {
+  const submitHandler = (e: FormEvent) => {
     e.preventDefault();
-    APIClient.fetchAuthToken(login, password)
-      .catch((error) => {
-        onError(error);
-      })
-      .then((r: any) => success(r.data));
+    APIClient.fetchAuthTokenFromServer(login, password)
+      .then((r: AxiosResponse) => success(r.data))
+      .catch((error: AxiosError) => {
+        const data: any = error.response?.data;
+        onError(data.detail);
+      });
   };
 
   return (
