@@ -1,8 +1,8 @@
 import { ChangeEvent, useState } from 'react';
 import { Alert } from 'reactstrap';
 import { useNavigate } from 'react-router-dom';
-import APIClient from '../../api/Client/Client';
 import { pushToken } from '../../connect/auth';
+import APIClient from '../../api/Client/Client';
 
 interface User {
   login: string;

@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import { LOGIN } from '../../urls/urls';
+import { AUTH } from '../../urls/urls';
 
 class Client {
   // eslint-disable-next-line class-methods-use-this
@@ -22,7 +22,7 @@ class Client {
 
   async fetchAuthToken(login: string, password: string) {
     const response: AxiosResponse = await axios({
-      url: LOGIN,
+      url: AUTH,
       method: 'post',
       headers: {
         Accept: 'application/json',
