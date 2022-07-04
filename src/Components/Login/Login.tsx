@@ -1,9 +1,10 @@
 import {
   ChangeEvent, useState, FormEvent, useEffect,
 } from 'react';
-import { Alert } from 'reactstrap';
+// import { Alert } from 'reactstrap';
 import { useNavigate } from 'react-router-dom';
 import { AxiosError, AxiosResponse } from 'axios';
+import swal from 'sweetalert';
 import { pushToken, getUserInfo, checkTokenExpirationDate } from '../../connect/auth';
 import APIClient from '../../api/Client/Client';
 
@@ -34,11 +35,12 @@ function Login() {
   };
 
   const onError = (error: string) => {
-    setState((prev: User) => ({ ...prev, errorMessage: error }));
+    // setState((prev: User) => ({ ...prev, errorMessage: error }));
     setState((prev: User) => ({ ...prev, showErrorMessage: true }));
-    setTimeout(() => {
-      setState((prev: User) => ({ ...prev, showErrorMessage: false }));
-    }, 3e3);
+    // setTimeout(() => {
+    //   setState((prev: User) => ({ ...prev, showErrorMessage: false }));
+    // }, 3e3);
+    swal(`Ошибка, не удалось войти: \n ${error}`);
   };
   const success = (r: Token) => {
     // console.log('саксесс', r);
@@ -125,21 +127,21 @@ function Login() {
             </div>
           </div>
         </div>
-        <div className="row justify-content-center">
-          <div className="py-2" />
-          {showErrorMessage
-            ? (
-              <Alert className="col-md-4" color="warning">
-                <strong>Ошибка!</strong>
-                {' '}
-                Не удалось войти
-                <div>
-                  {state.errorMessage}
-                </div>
-              </Alert>
-            )
-            : ''}
-        </div>
+        {/* <div className="row justify-content-center"> */}
+        {/*  <div className="py-2" /> */}
+        {/*  {showErrorMessage */}
+        {/*    ? ( */}
+        {/*      <Alert className="col-md-4" color="warning"> */}
+        {/*        <strong>Ошибка!</strong> */}
+        {/*        {' '} */}
+        {/*        Не удалось войти */}
+        {/*        <div> */}
+        {/*          {state.errorMessage} */}
+        {/*        </div> */}
+        {/*      </Alert> */}
+        {/*    ) */}
+        {/*    : ''} */}
+        {/* </div> */}
       </div>
     </div>
   );
