@@ -1,8 +1,9 @@
 import Select from 'react-select';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, FormEvent } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { getTokenFromLocalStorage, getUserInfo } from '../../connect/auth';
+import swal from 'sweetalert';
+import { getTokenFromLocalStorage, getUserInfo, pushCurrentOffice } from '../../connect/auth';
 import { GET_OFFICES } from '../../urls/urls';
 
 interface Office {
@@ -46,6 +47,14 @@ function Officein() {
     }
   };
 
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    console.log(e);
+    if (state.selectedOffice) {
+      pushCurrentOffice(state.selectedOffice);
+    } else { swal('выберите офис'); }
+  };
+
   useEffect(() => {
     (async function resolve() { await fetchOffices(); }());
   }, []);
@@ -65,7 +74,7 @@ function Officein() {
             <div className="card-group mb-0">
               <div className="card p-4">
                 <div className="card-block">
-                  <form action="">
+                  <form action="" onSubmit={handleSubmit}>
                     <h1 className="text-center">Выберете офис</h1>
                     <div
                       className="col-md-12 py-1"

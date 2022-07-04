@@ -21,6 +21,15 @@ export function pushToken(token: string) {
   localStorage.setItem(USER_TOKEN, token);
 }
 
+export function pushCurrentOffice(office: any) {
+  try {
+    localStorage.setItem(CURRENT_USER_OFFICE, JSON.stringify(office));
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
 export function getTokenFromLocalStorage() {
   return localStorage.getItem(USER_TOKEN) || '';
 }
