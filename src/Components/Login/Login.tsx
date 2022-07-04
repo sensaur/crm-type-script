@@ -1,7 +1,6 @@
 import {
   ChangeEvent, useState, FormEvent, useEffect,
 } from 'react';
-// import { Alert } from 'reactstrap';
 import { useNavigate } from 'react-router-dom';
 import { AxiosError, AxiosResponse } from 'axios';
 import swal from 'sweetalert';
@@ -11,7 +10,6 @@ import APIClient from '../../api/Client/Client';
 interface User {
   login: string;
   password: string;
-  showErrorMessage: boolean;
   errorMessage: string,
 }
 
@@ -25,7 +23,6 @@ function Login() {
   const [state, setState] = useState<User>({
     login: '',
     password: '',
-    showErrorMessage: false,
     errorMessage: '',
   });
 
@@ -35,11 +32,6 @@ function Login() {
   };
 
   const onError = (error: string) => {
-    // setState((prev: User) => ({ ...prev, errorMessage: error }));
-    setState((prev: User) => ({ ...prev, showErrorMessage: true }));
-    // setTimeout(() => {
-    //   setState((prev: User) => ({ ...prev, showErrorMessage: false }));
-    // }, 3e3);
     swal(`Ошибка, не удалось войти: \n ${error}`);
   };
   const success = (r: Token) => {
@@ -49,7 +41,7 @@ function Login() {
   };
 
   const {
-    login, password, showErrorMessage,
+    login, password,
   } = state;
 
   const submitHandler = (e: FormEvent) => {
@@ -127,21 +119,6 @@ function Login() {
             </div>
           </div>
         </div>
-        {/* <div className="row justify-content-center"> */}
-        {/*  <div className="py-2" /> */}
-        {/*  {showErrorMessage */}
-        {/*    ? ( */}
-        {/*      <Alert className="col-md-4" color="warning"> */}
-        {/*        <strong>Ошибка!</strong> */}
-        {/*        {' '} */}
-        {/*        Не удалось войти */}
-        {/*        <div> */}
-        {/*          {state.errorMessage} */}
-        {/*        </div> */}
-        {/*      </Alert> */}
-        {/*    ) */}
-        {/*    : ''} */}
-        {/* </div> */}
       </div>
     </div>
   );
