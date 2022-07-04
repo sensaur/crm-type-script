@@ -1,5 +1,8 @@
 import jwt_decode from 'jwt-decode';
 // import { useNavigate } from 'react-router-dom';
+import {
+  Navigate,
+} from 'react-router-dom';
 
 interface UserToken {
   token_type: string
@@ -19,6 +22,19 @@ export const CURRENT_USER_OFFICE = 'office';
 
 export function pushToken(token: string) {
   localStorage.setItem(USER_TOKEN, token);
+}
+
+export function removeToken() {
+  localStorage.removeItem(USER_TOKEN);
+}
+
+export function removeCurrentOffice() {
+  localStorage.removeItem(CURRENT_USER_OFFICE);
+}
+
+export function deauthenticateUser() {
+  removeToken();
+  removeCurrentOffice();
 }
 
 export function pushCurrentOffice(office: any) {
@@ -87,21 +103,23 @@ export function AuthRequired(props: any) {
 
   if (!userInfo || !checkTokenExpirationDate(userInfo.exp)) {
     console.log('deauth');
-    // deauthenticateUser();
-    // return navigate('login');
+    deauthenticateUser();
+    console.log(localStorage);
+    return <Navigate to="/login" />;
   }
   if (!officeId) {
     console.log('deauth');
-    // deauthenticateUser();
-    // return navigate('officein');
+    deauthenticateUser();
+    return <Navigate to="/login" />;
   }
 
   // @ts-ignore
-  if (!userInfo.is_admin || !Object.keys(userInfo.is_admin).includes(officeId.toString())) {
-    // deauthenticateUser();
-    console.log('deauth');
-    // return navigate('login');
-  }
+  // if (!userInfo.is_admin || !Object.keys(userInfo.is_admin).includes(officeId.toString())) {
+  //   // deauthenticateUser();
+  //   console.log('deauth');
+  //   // return navigate('login');
+  // }
 
+  // eslint-disable-next-line react/destructuring-assignment
   return (props.children);
 }

@@ -2,6 +2,8 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Login from './Components/Login/Login';
 import Officein from './Components/Officein/Officein';
+import Dashboard from './Components/Dashboard/Dashboard';
+import { AuthRequired } from './connect/auth';
 
 function App() {
   return (
@@ -9,6 +11,7 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/" element={<Login />} />
       <Route path="/officein" element={<Officein />} />
+      <Route path="/dashboard" element={<AuthRequired><Dashboard /></AuthRequired>} />
     </Routes>
   );
 }

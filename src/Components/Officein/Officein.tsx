@@ -3,7 +3,9 @@ import { useState, useEffect, FormEvent } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import swal from 'sweetalert';
-import { getTokenFromLocalStorage, getUserInfo, pushCurrentOffice } from '../../connect/auth';
+import {
+  checkTokenExpirationDate, getTokenFromLocalStorage, getUserInfo, pushCurrentOffice,
+} from '../../connect/auth';
 import { GET_OFFICES } from '../../urls/urls';
 
 interface Office {
@@ -49,9 +51,9 @@ function Officein() {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    console.log(e);
     if (state.selectedOffice) {
       pushCurrentOffice(state.selectedOffice);
+      navigate('/dashboard');
     } else { swal('выберите офис'); }
   };
 
@@ -60,8 +62,8 @@ function Officein() {
   }, []);
 
   useEffect(() => {
-    if (userInfo === null) {
-      navigate('/login', { replace: true });
+    if (userInfo === null || !checkTokenExpirationDate(userInfo.exp)) {
+      navigate('/login');
     }
   //   } else navigate('/');
   }, [userInfo]);
