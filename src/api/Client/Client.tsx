@@ -7,11 +7,12 @@ interface ObjInt {
 }
 
 class Client {
-  // eslint-disable-next-line class-methods-use-this
   encodeObject(obj: ObjInt) {
+    console.log('this=>', this);
+    // console.log('obj', obj);
     const filters: string[] = [];
     if (obj) {
-      Object.keys(obj).forEach((k) => {
+      Object.keys(obj).forEach((k: string) => {
         const value: string = obj[k as keyof typeof obj];
         if (Array.isArray(value)) {
           value.forEach((v) => {
