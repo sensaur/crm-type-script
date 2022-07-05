@@ -1,5 +1,4 @@
 import jwt_decode from 'jwt-decode';
-// import { useNavigate } from 'react-router-dom';
 import {
   Navigate,
 } from 'react-router-dom';
@@ -50,6 +49,10 @@ export function getTokenFromLocalStorage() {
   return localStorage.getItem(USER_TOKEN) || '';
 }
 
+export function getCurrentOfficeFromLocalStorage() {
+  return localStorage.getItem(CURRENT_USER_OFFICE);
+}
+
 export function getUserInfoByToken(token: string) {
   return jwt_decode<UserToken>(token);
 }
@@ -64,10 +67,6 @@ export function getUserInfo() {
 
 export function checkTokenExpirationDate(timestamp: number) {
   return timestamp > (new Date().getTime() / 1000);
-}
-
-export function getCurrentOfficeFromLocalStorage() {
-  return localStorage.getItem(CURRENT_USER_OFFICE);
 }
 
 export function getCurrentOfficeId() {
@@ -95,9 +94,7 @@ export function getCurrentOfficeId() {
 }
 export function AuthRequired({ children }: { children: JSX.Element }) {
   const userInfo = getUserInfo();
-  console.log(userInfo);
   const officeId = getCurrentOfficeId();
-  console.log(officeId);
 
   if (!userInfo || !checkTokenExpirationDate(userInfo.exp) || !officeId) {
     deauthenticateUser();
