@@ -6,10 +6,8 @@ interface ObjInt {
   password: string
 }
 
-class Client {
-  encodeObject(obj: ObjInt) {
-    console.log('this=>', this);
-    // console.log('obj', obj);
+class APIClient {
+  static encodeObject = (obj: ObjInt) => {
     const filters: string[] = [];
     if (obj) {
       Object.keys(obj).forEach((k: string) => {
@@ -24,9 +22,9 @@ class Client {
       });
     }
     return `&${filters.join('&')}`;
-  }
+  };
 
-  async fetchAuthTokenFromServer(login: string, password: string) {
+  static async fetchAuthTokenFromServer(login: string, password: string) {
     const response: AxiosResponse = await axios({
       url: AUTH,
       method: 'post',
@@ -34,11 +32,10 @@ class Client {
         Accept: 'application/json',
         'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
       },
-      data: this.encodeObject({ username: login, password }),
+      data: APIClient.encodeObject({ username: login, password }),
     });
     return response;
   }
 }
 
-const APIClient = new Client();
 export default APIClient;
