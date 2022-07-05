@@ -13,7 +13,6 @@ class Client {
     if (obj) {
       Object.keys(obj).forEach((k) => {
         const value: string = obj[k as keyof typeof obj];
-        console.log(value, typeof value);
         if (Array.isArray(value)) {
           value.forEach((v) => {
             filters.push(`${encodeURIComponent(k)}=${encodeURIComponent(v)}`);
