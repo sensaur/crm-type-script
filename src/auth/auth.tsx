@@ -4,20 +4,24 @@ import {
 } from 'react-router-dom';
 
 interface UserToken {
+  is_super_admin: boolean
   token_type: string
   exp: number
   iat: number
   jti: string
-  user_id: number,
+  user_id: number
   username: string
   is_employee: boolean
-  is_admin: { number: true }
-  offices_agencies: { number: number },
+  is_admin: { [key: string]: boolean }
+  offices_agencies: { number: number }
   role: number
 }
 
-export const USER_TOKEN = 'token';
+export const ADMIN = 'admin';
 export const CURRENT_USER_OFFICE = 'office';
+export const MANAGER = 'manager';
+export const SUPER_ADMIN = 'super_admin';
+export const USER_TOKEN = 'token';
 
 export function pushToken(token: string) {
   localStorage.setItem(USER_TOKEN, token);
@@ -109,4 +113,24 @@ export function AuthRequired({ children }: { children: JSX.Element }) {
   // }
 
   return (children);
+}
+
+export function getUserRole() {
+  try {
+    const info = getUserInfo();
+    const office = getCurrentOfficeId();
+    if (!info || !office) {
+      return '';
+    }
+    if (info.is_super_admin) {
+      return SUPER_ADMIN;
+    }
+    if (Object.prototype.hasOwnProperty.call(info.is_admin, office)) {
+      return info.is_admin[office] ? ADMIN : MANAGER;
+    }
+    return '';
+  } catch (e) {
+    console.log(e);
+    return e;
+  }
 }

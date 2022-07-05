@@ -47,6 +47,7 @@
         "tsx": "never"
       }
     ],
-    "import/no-relative-packages": 0
+    "import/no-relative-packages": 0,
+    "no-debugger": 0
   }
 }
