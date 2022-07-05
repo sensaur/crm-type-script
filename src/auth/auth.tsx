@@ -93,22 +93,13 @@ export function getCurrentOfficeId() {
 
   return Number.isNaN(officeId) ? 0 : officeId;
 }
-
-export function AuthRequired(props: any) {
-  // const navigate = useNavigate();
+export function AuthRequired({ children }: { children: JSX.Element }) {
   const userInfo = getUserInfo();
   console.log(userInfo);
   const officeId = getCurrentOfficeId();
   console.log(officeId);
 
-  if (!userInfo || !checkTokenExpirationDate(userInfo.exp)) {
-    console.log('deauth');
-    deauthenticateUser();
-    console.log(localStorage);
-    return <Navigate to="/login" />;
-  }
-  if (!officeId) {
-    console.log('deauth');
+  if (!userInfo || !checkTokenExpirationDate(userInfo.exp) || !officeId) {
     deauthenticateUser();
     return <Navigate to="/login" />;
   }
@@ -120,6 +111,5 @@ export function AuthRequired(props: any) {
   //   // return navigate('login');
   // }
 
-  // eslint-disable-next-line react/destructuring-assignment
-  return (props.children);
+  return (children);
 }

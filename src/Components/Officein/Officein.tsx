@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import swal from 'sweetalert';
 import {
   checkTokenExpirationDate, getTokenFromLocalStorage, getUserInfo, pushCurrentOffice,
-} from '../../connect/auth';
+} from '../../auth/auth';
 import { GET_OFFICES } from '../../urls/urls';
 
 interface Office {
@@ -65,7 +65,6 @@ function Officein() {
     if (userInfo === null || !checkTokenExpirationDate(userInfo.exp)) {
       navigate('/login');
     }
-  //   } else navigate('/');
   }, [userInfo]);
 
   return (

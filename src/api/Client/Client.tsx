@@ -1,13 +1,19 @@
 import axios, { AxiosResponse } from 'axios';
 import { AUTH } from '../../urls/urls';
 
+interface ObjInt {
+  username: string
+  password: string
+}
+
 class Client {
   // eslint-disable-next-line class-methods-use-this
-  encodeObject(obj: any) {
+  encodeObject(obj: ObjInt) {
     const filters: string[] = [];
     if (obj) {
       Object.keys(obj).forEach((k) => {
-        const value = obj[k];
+        const value: string = obj[k as keyof typeof obj];
+        console.log(value, typeof value);
         if (Array.isArray(value)) {
           value.forEach((v) => {
             filters.push(`${encodeURIComponent(k)}=${encodeURIComponent(v)}`);

@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import Login from './Components/Login/Login';
 import Officein from './Components/Officein/Officein';
 import Dashboard from './Components/Dashboard/Dashboard';
-import { AuthRequired } from './connect/auth';
+import { AuthRequired } from './auth/auth';
 
 function App() {
   return (

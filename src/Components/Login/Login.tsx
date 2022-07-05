@@ -4,7 +4,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { AxiosError, AxiosResponse } from 'axios';
 import swal from 'sweetalert';
-import { pushToken, getUserInfo, checkTokenExpirationDate } from '../../connect/auth';
+import { pushToken, getUserInfo, checkTokenExpirationDate } from '../../auth/auth';
 import APIClient from '../../api/Client/Client';
 
 interface User {
@@ -35,7 +35,6 @@ function Login() {
     swal(`Ошибка, не удалось войти: \n ${error}`);
   };
   const success = (r: Token) => {
-    // console.log('саксесс', r);
     pushToken(r.access);
     navigate('/officein', { replace: true });
   };
@@ -55,16 +54,12 @@ function Login() {
   };
 
   if (!localStorage.getItem('auth')) {
-    // console.log(localStorage);
     localStorage.clear();
     localStorage.setItem('auth', '1');
-    // console.log(localStorage);
   }
 
   const userInfo = getUserInfo();
-  // console.log('userInfoFROMLOGIN==>', userInfo);
   useEffect(() => {
-    // console.log('!userInfo=>>', !userInfo);
     if (!!userInfo && checkTokenExpirationDate(userInfo.exp)) {
       navigate('/officein', { replace: true });
     }
