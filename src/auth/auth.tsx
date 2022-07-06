@@ -134,3 +134,28 @@ export function getUserRole() {
     return e;
   }
 }
+
+export function fetchCurrentOffice() {
+  return localStorage.getItem(CURRENT_USER_OFFICE);
+}
+
+export function getCurrentOfficeData() {
+  const office = fetchCurrentOffice();
+  let officeData = {};
+
+  if (typeof office !== 'string') {
+    return {};
+  }
+
+  try {
+    officeData = JSON.parse(office);
+  } catch (e) {
+    return {};
+  }
+
+  if (typeof officeData !== 'object' || !officeData) {
+    return {};
+  }
+
+  return officeData;
+}
