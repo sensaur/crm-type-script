@@ -76,6 +76,11 @@ function Header() {
             <li className="nav-item">
               <a className="nav-link" href="/11">Link</a>
             </li>
+            <li className="nav-item">
+              <a href="/11" className="nav-link disabled">Disabled</a>
+            </li>
+          </ul>
+          <ul className="navbar-nav">
             <li className="nav-item dropdown">
               <a
                 className="nav-link dropdown-toggle"
@@ -95,9 +100,6 @@ function Header() {
                 <li><button type="button" className="dropdown-item" onClick={() => { navigate('/login'); }}>{userOffice.address || userOffice.name}</button></li>
                 <li><button type="button" className="dropdown-item" onClick={logout}>Выйти</button></li>
               </ul>
-            </li>
-            <li className="nav-item">
-              <a href="/11" className="nav-link disabled">Disabled</a>
             </li>
           </ul>
           <form className="d-flex" role="search">
