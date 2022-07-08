@@ -50,6 +50,8 @@ function Login() {
       .catch((error: AxiosError) => {
         const data: any = error.response?.data;
         onError(data.detail);
+        console.log(error);
+        console.log('111');
       });
   };
 
