@@ -13,6 +13,8 @@ interface User {
   errorMessage: string,
 }
 
+// type ServerError = { errorMessage: string };
+
 interface Token {
   access: string;
   refresh: string;
@@ -31,9 +33,11 @@ function Login() {
     setState((prev: User) => ({ ...prev, [name]: value }));
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-shadow
   const onError = (error: string) => {
     swal(`Ошибка, не удалось войти: \n ${error}`);
   };
+  console.log('--', onError);
   const success = (r: Token) => {
     pushToken(r.access);
     navigate('/officein', { replace: true });
@@ -47,11 +51,10 @@ function Login() {
     e.preventDefault();
     APIClient.fetchAuthTokenFromServer(login, password)
       .then((r: AxiosResponse) => success(r.data))
-      .catch((error: AxiosError) => {
-        const data: any = error.response?.data;
-        onError(data.detail);
-        console.log(error);
-        console.log('111');
+      .catch((error:AxiosError) => {
+        if (error.response?.status === 0) {
+          onError(error.message);
+        } else { onError(JSON.stringify(error?.response?.data).replace(/[{}[\]"]/g, ' ')); }
       });
   };
 
