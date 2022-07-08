@@ -37,7 +37,6 @@ function Login() {
   const onError = (error: string) => {
     swal(`Ошибка, не удалось войти: \n ${error}`);
   };
-  console.log('--', onError);
   const success = (r: Token) => {
     pushToken(r.access);
     navigate('/officein', { replace: true });
@@ -54,7 +53,11 @@ function Login() {
       .catch((error:AxiosError) => {
         if (error.response?.status === 0) {
           onError(error.message);
-        } else { onError(JSON.stringify(error?.response?.data).replace(/[{}[\]"]/g, ' ')); }
+        } else {
+          const errors = JSON.stringify(error?.response?.data);
+          const errorsClean = errors.replace(/[{}[\]"]/g, ' ').replace(/,/g, '\n');
+          onError(errorsClean);
+        }
       });
   };
 
