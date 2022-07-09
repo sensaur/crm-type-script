@@ -4,7 +4,11 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import swal from 'sweetalert';
 import {
-  checkTokenExpirationDate, getTokenFromLocalStorage, getUserInfo, pushCurrentOffice,
+  checkTokenExpirationDate,
+  deauthenticateUser,
+  getTokenFromLocalStorage,
+  getUserInfo,
+  pushCurrentOffice,
 } from '../../auth/auth';
 import { GET_OFFICES } from '../../urls/urls';
 
@@ -44,8 +48,11 @@ function Officein() {
         },
       });
       setState((prev: ArrayObjectSelectState) => ({ ...prev, offices: response?.data || [] }));
-    } catch (error) {
+    } catch (error: any) {
+      swal(JSON.stringify(error.response.data));
       console.error('error', error);
+      deauthenticateUser();
+      navigate('/login');
     }
   };
 

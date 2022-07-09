@@ -17,6 +17,13 @@ interface UserToken {
   role: number
 }
 
+interface Office {
+  address?: string
+  fp_type?: string
+  id?: number
+  name?: string
+}
+
 export const ADMIN = 'admin';
 export const CURRENT_USER_OFFICE = 'office';
 export const MANAGER = 'manager';
@@ -40,7 +47,7 @@ export function deauthenticateUser() {
   removeCurrentOffice();
 }
 
-export function pushCurrentOffice(office: any) {
+export function pushCurrentOffice(office: Office) {
   try {
     localStorage.setItem(CURRENT_USER_OFFICE, JSON.stringify(office));
     return true;
@@ -54,6 +61,7 @@ export function getTokenFromLocalStorage() {
 }
 
 export function getCurrentOfficeFromLocalStorage() {
+  console.log(localStorage.getItem(CURRENT_USER_OFFICE));
   return localStorage.getItem(CURRENT_USER_OFFICE);
 }
 
@@ -74,27 +82,17 @@ export function checkTokenExpirationDate(timestamp: number) {
 }
 
 export function getCurrentOfficeId() {
-  const office = getCurrentOfficeFromLocalStorage();
-  let officeData: { id?: any } = {};
-  let officeId = 0;
-
-  if (typeof office !== 'string') {
-    return 0;
-  }
-
   try {
-    officeData = JSON.parse(office);
+    const office: any = getCurrentOfficeFromLocalStorage();
+    console.log('office', office);
+    console.log('typeof office', typeof office);
+    const officeData = JSON.parse(office);
+    console.log('officeData', officeData);
+    const { id } = officeData;
+    return Number.isNaN(id) ? 0 : id;
   } catch (e) {
     return 0;
   }
-
-  if (typeof officeData !== 'object' || !officeData) {
-    return 0;
-  }
-
-  officeId = parseInt(officeData.id, 10);
-
-  return Number.isNaN(officeId) ? 0 : officeId;
 }
 export function AuthRequired({ children }: { children: JSX.Element }) {
   const userInfo = getUserInfo();
