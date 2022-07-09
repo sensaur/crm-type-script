@@ -17,8 +17,8 @@ function Header() {
   const navigate = useNavigate();
   const userInfo = getUserInfo();
   const userOffice: any = getCurrentOfficeData();
-  console.log(userInfo);
-  console.log(userOffice);
+  // console.log(userInfo);
+  // console.log(userOffice);
   //
   // const [state, setState] = useState<HeaderState>({
   //   dropdownOpen: false,
@@ -34,6 +34,12 @@ function Header() {
   const logout = () => {
     deauthenticateUser();
     navigate('/login');
+  };
+
+  const sidebarToggle = (e: any) => {
+    e.preventDefault();
+    // document.body.classList.toggle('sidebar-hidden');
+    console.log('111');
   };
   //
   // const toggle = () => {
@@ -75,6 +81,16 @@ function Header() {
             </li>
             <li className="nav-item">
               <a className="nav-link" href="/11">Link</a>
+            </li>
+            <li className="nav-item">
+              <button
+                className="nav-link navbar-toggler sidebar-toggler"
+                type="button"
+                onClick={sidebarToggle}
+              >
+                &#9776;
+                adsasda
+              </button>
             </li>
             <li className="nav-item">
               <a href="/11" className="nav-link disabled">Disabled</a>

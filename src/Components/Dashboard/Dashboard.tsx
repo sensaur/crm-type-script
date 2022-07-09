@@ -1,6 +1,6 @@
 function Dashboard() {
   return (
-    <div>###Дашбоар###</div>
+    <div>###Дашбоард###</div>
   );
 }
 
