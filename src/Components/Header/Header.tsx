@@ -1,6 +1,6 @@
 // import { useState } from 'react';
 // import { Dropdown, DropdownMenu, DropdownItem } from 'reactstrap';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { getCurrentOfficeData, getUserInfo, deauthenticateUser } from '../../auth/auth';
 
 // interface HeaderState {
@@ -62,7 +62,7 @@ function Header() {
   return (
     <nav className="navbar navbar-expand-lg bg-light">
       <div className="container-fluid">
-        <a className="navbar-brand" href="/11">Navbar</a>
+        <Link className="navbar-brand" to="/">ГЕОКЛИЕНТ</Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -84,12 +84,12 @@ function Header() {
             </li>
             <li className="nav-item">
               <button
-                className="nav-link navbar-toggler sidebar-toggler"
+                // className="nav-link navbar-toggler sidebar-toggler"
+                className="nav-link"
                 type="button"
                 onClick={sidebarToggle}
               >
                 &#9776;
-                adsasda
               </button>
             </li>
             <li className="nav-item">
