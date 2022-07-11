@@ -61,7 +61,7 @@ export function getTokenFromLocalStorage() {
 }
 
 export function getCurrentOfficeFromLocalStorage() {
-  console.log(localStorage.getItem(CURRENT_USER_OFFICE));
+  // console.log(localStorage.getItem(CURRENT_USER_OFFICE));
   return localStorage.getItem(CURRENT_USER_OFFICE);
 }
 
@@ -84,10 +84,10 @@ export function checkTokenExpirationDate(timestamp: number) {
 export function getCurrentOfficeId() {
   try {
     const office: any = getCurrentOfficeFromLocalStorage();
-    console.log('office', office);
-    console.log('typeof office', typeof office);
+    // console.log('office', office);
+    // console.log('typeof office', typeof office);
     const officeData = JSON.parse(office);
-    console.log('officeData', officeData);
+    // console.log('officeData', officeData);
     const { id } = officeData;
     return Number.isNaN(id) ? 0 : id;
   } catch (e) {

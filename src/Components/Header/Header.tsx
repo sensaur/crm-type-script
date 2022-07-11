@@ -1,7 +1,8 @@
 // import { useState } from 'react';
 // import { Dropdown, DropdownMenu, DropdownItem } from 'reactstrap';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { getCurrentOfficeData, getUserInfo, deauthenticateUser } from '../../auth/auth';
+import routes from '../../routes';
 
 // interface HeaderState {
 //   dropdownOpen: boolean
@@ -16,7 +17,10 @@ import { getCurrentOfficeData, getUserInfo, deauthenticateUser } from '../../aut
 function Header() {
   const navigate = useNavigate();
   const userInfo = getUserInfo();
+  const url = useLocation();
   const userOffice: any = getCurrentOfficeData();
+  const pathName = routes[url.pathname as keyof typeof routes];
+
   // console.log(userInfo);
   // console.log(userOffice);
   //
@@ -80,6 +84,7 @@ function Header() {
             </ul>
           </li>
         </ul>
+        <span>{pathName}</span>
         {/* <button */}
         {/*  className="navbar-toggler" */}
         {/*  type="button" */}
