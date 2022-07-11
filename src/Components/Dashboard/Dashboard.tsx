@@ -1,6 +1,6 @@
 function Dashboard() {
   return (
-    <div>###Дашбоард###</div>
+    <h1 className="container-fluid">Дашбоард</h1>
   );
 }
 

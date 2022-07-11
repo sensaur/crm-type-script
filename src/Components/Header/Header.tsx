@@ -1,6 +1,6 @@
 // import { useState } from 'react';
 // import { Dropdown, DropdownMenu, DropdownItem } from 'reactstrap';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { getCurrentOfficeData, getUserInfo, deauthenticateUser } from '../../auth/auth';
 
 // interface HeaderState {
@@ -36,11 +36,11 @@ function Header() {
     navigate('/login');
   };
 
-  const sidebarToggle = (e: any) => {
-    e.preventDefault();
-    // document.body.classList.toggle('sidebar-hidden');
-    console.log('111');
-  };
+  // const sidebarToggle = (e: any) => {
+  //   e.preventDefault();
+  //   // document.body.classList.toggle('sidebar-hidden');
+  //   console.log('111');
+  // };
   //
   // const toggle = () => {
   //   setState((prev: HeaderState) => ({
@@ -62,52 +62,67 @@ function Header() {
   return (
     <nav className="navbar navbar-expand-lg bg-light">
       <div className="container-fluid">
-        <Link className="navbar-brand" to="/">ГЕОКЛИЕНТ</Link>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon" />
-        </button>
+        {/* <Link className="navbar-brand" to="/dashboard">ГЕОКЛИЕНТ</Link> */}
+        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+          <li className="nav-item dropdown">
+            <span
+              className="nav-link dropdown-toggle"
+              id="navbarDropdown"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              ГЕОКЛИЕНТ
+            </span>
+            <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><button style={{ background: '#009436', color: 'white' }} type="button" className="dropdown-item" onClick={() => { navigate('/dashboard'); }}>Рабочий стол менеджера</button></li>
+              <li><button style={{ background: '#f0b504', color: 'white' }} type="button" className="dropdown-item" onClick={() => { navigate('/sellbook'); }}>Книга продаж</button></li>
+            </ul>
+          </li>
+        </ul>
+        {/* <button */}
+        {/*  className="navbar-toggler" */}
+        {/*  type="button" */}
+        {/*  data-bs-toggle="collapse" */}
+        {/*  data-bs-target="#navbarSupportedContent" */}
+        {/*  aria-controls="navbarSupportedContent" */}
+        {/*  aria-expanded="false" */}
+        {/*  aria-label="Toggle navigation" */}
+        {/* > */}
+        {/*  <span className="navbar-toggler-icon" /> */}
+        {/* </button> */}
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+            {/* <li className="nav-item"> */}
+            {/*  <Link className="nav-link active" aria-current="page" to="/11">Home</Link> */}
+            {/* </li> */}
+            {/* <li className="nav-item"> */}
+            {/*  <Link className="nav-link" to="/11">Link</Link> */}
+            {/* </li> */}
+            {/* <li className="nav-item"> */}
+            {/*  <button */}
+            {/*    className="nav-link" */}
+            {/*    type="button" */}
+            {/*    onClick={sidebarToggle} */}
+            {/*  > */}
+            {/*    &#9776; */}
+            {/*  </button> */}
+            {/* </li> */}
             <li className="nav-item">
-              <a className="nav-link active" aria-current="page" href="/11">Home</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="/11">Link</a>
-            </li>
-            <li className="nav-item">
-              <button
-                // className="nav-link navbar-toggler sidebar-toggler"
-                className="nav-link"
-                type="button"
-                onClick={sidebarToggle}
-              >
-                &#9776;
-              </button>
-            </li>
-            <li className="nav-item">
-              <a href="/11" className="nav-link disabled">Disabled</a>
+              {/* <a href="/11" className="nav-link disabled">Disabled</a> */}
             </li>
           </ul>
           <ul className="navbar-nav">
             <li className="nav-item dropdown">
-              <a
+              <span
                 className="nav-link dropdown-toggle"
-                href="11"
                 id="navbarDropdown"
                 role="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
                 {userInfo?.username}
-              </a>
+              </span>
               <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li className="text-center">Действия</li>
                 <li>
