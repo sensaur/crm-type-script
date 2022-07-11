@@ -1,4 +1,24 @@
+import { useEffect } from 'react';
+import axios, { AxiosResponse } from 'axios';
+import { FRANCH } from '../../urls/urls';
+import { getCurrentOfficeId, getTokenFromLocalStorage } from '../../auth/auth';
+
 function FranchAppList() {
+  const fetchFranchiseApplications = async () => {
+    const response: AxiosResponse = await axios(`${FRANCH}?&page=1`, {
+      headers: {
+        Accept: 'application/json',
+        Authorization: `JWT ${getTokenFromLocalStorage()}`,
+        office: 836,
+        // @ts-ignore
+        office: getCurrentOfficeId(),
+      },
+    });
+    console.log(response);
+    return response;
+  };
+  useEffect(() => { fetchFranchiseApplications(); }, []);
+
   return (
     <table className="table">
       <thead>

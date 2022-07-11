@@ -94,6 +94,7 @@ export function getCurrentOfficeId() {
     return 0;
   }
 }
+
 export function AuthRequired({ children }: { children: JSX.Element }) {
   const userInfo = getUserInfo();
   const officeId = getCurrentOfficeId();
