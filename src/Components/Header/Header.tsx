@@ -81,6 +81,7 @@ function Header() {
             <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><button style={{ background: '#009436', color: 'white' }} type="button" className="dropdown-item" onClick={() => { navigate('/dashboard'); }}>Рабочий стол менеджера</button></li>
               <li><button style={{ background: '#f0b504', color: 'white' }} type="button" className="dropdown-item" onClick={() => { navigate('/sellbook'); }}>Книга продаж</button></li>
+              <li><button style={{ background: '#0094DE', color: 'white' }} type="button" className="dropdown-item" onClick={() => { navigate('/franchising'); }}>Заявки на франчайзинг</button></li>
             </ul>
           </li>
         </ul>

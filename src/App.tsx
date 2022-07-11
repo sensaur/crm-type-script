@@ -6,6 +6,7 @@ import Dashboard from './Components/Dashboard/Dashboard';
 import { AuthRequired } from './auth/auth';
 import Header from './Components/Header/Header';
 import SellBook from './Components/SellBook/SellBook';
+import FranchApps from './Components/FranchApps/FranchApps';
 
 function App() {
   return (
@@ -31,6 +32,17 @@ function App() {
             <>
               <Header />
               <Dashboard />
+            </>
+          </AuthRequired>
+        )}
+      />
+      <Route
+        path="/franchising"
+        element={(
+          <AuthRequired>
+            <>
+              <Header />
+              <FranchApps />
             </>
           </AuthRequired>
         )}

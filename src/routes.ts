@@ -16,6 +16,7 @@ const routes = {
   '/telebot': 'Телеграм рассылки',
   '/quotes': 'Геоподборка',
   '/options': 'Настройки',
+  '/franchising': 'Заявки на франчайзинг',
 };
 
 export default routes;
