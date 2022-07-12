@@ -9,13 +9,11 @@ function FranchAppList() {
       headers: {
         Accept: 'application/json',
         Authorization: `JWT ${getTokenFromLocalStorage()}`,
-        office: 836,
-        // @ts-ignore
         office: getCurrentOfficeId(),
       },
     });
-    console.log(response);
-    return response;
+    console.log(response.data);
+    return response.data;
   };
   useEffect(() => { fetchFranchiseApplications(); }, []);
 

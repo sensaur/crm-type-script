@@ -2,10 +2,10 @@ import FranchAppList from './FranchAppList';
 
 function FranchApps() {
   return (
-    <>
-      <h1 className="container-fluid">Франч</h1>
+    <div className="container-fluid">
+      <h1>Франч</h1>
       <FranchAppList />
-    </>
+    </div>
   );
 }
 

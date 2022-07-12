@@ -1,8 +1,9 @@
 // import { useState } from 'react';
 // import { Dropdown, DropdownMenu, DropdownItem } from 'reactstrap';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { getCurrentOfficeData, getUserInfo, deauthenticateUser } from '../../auth/auth';
+import { FormEvent } from 'react';
 import routes from '../../routes';
+import { getCurrentOfficeData, getUserInfo, deauthenticateUser } from '../../auth/auth';
 
 // interface HeaderState {
 //   dropdownOpen: boolean
@@ -38,6 +39,11 @@ function Header() {
   const logout = () => {
     deauthenticateUser();
     navigate('/login');
+  };
+
+  const handleLogout = (e: FormEvent) => {
+    e.preventDefault();
+    logout();
   };
 
   // const sidebarToggle = (e: any) => {
@@ -141,7 +147,7 @@ function Header() {
           </ul>
           <form className="d-flex" role="search">
             <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-            <button className="btn btn-outline-success" type="submit" onClick={logout}>Выйти</button>
+            <button className="btn btn-outline-success" type="submit" onClick={handleLogout}>Выйти</button>
           </form>
         </div>
       </div>
