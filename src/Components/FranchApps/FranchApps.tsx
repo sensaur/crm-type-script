@@ -7,7 +7,7 @@ import { getCurrentOfficeId, getTokenFromLocalStorage } from '../../auth/auth';
 function FranchApps() {
   const [state, setState] = useState({
     items: [],
-    filter: '',
+    filter: '&country=russia',
     page: 1,
     count: 0,
     selected: [],
@@ -18,7 +18,7 @@ function FranchApps() {
     errors: null,
   });
   const fetchFranchiseApplications = async () => {
-    const response: AxiosResponse = await axios(`${FRANCH}?&page=${state.page}`, {
+    const response: AxiosResponse = await axios(`${FRANCH}?${state.filter}&page=${state.page}`, {
       headers: {
         Accept: 'application/json',
         Authorization: `JWT ${getTokenFromLocalStorage()}`,
