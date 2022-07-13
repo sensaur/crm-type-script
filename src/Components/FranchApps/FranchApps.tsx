@@ -38,26 +38,26 @@ function FranchApps() {
         office: getCurrentOfficeId(),
       },
     });
-    console.log(response.data);
+    // console.log(response.data);
     setState((prev: any) => (
       { ...prev, items: response.data.results, count: response.data.count }
     ));
     return response.data;
   };
-  const handleFilter = (filter: any) => {
-    setState((prev: any) => ({ ...prev, filter }));
-  };
+  // const handleFilter = (filter: any) => {
+  //   setState((prev: any) => ({ ...prev, filter }));
+  // };
   useEffect(() => {
     fetchFranchApps();
   }, []);
-  console.log(handleFilter);
+  // console.log(handleFilter);
   return (
     <div className="container-fluid">
       <h3>
         Всего:&nbsp;
         {state.count}
       </h3>
-      <FranchAppList props={state.items} />
+      <FranchAppList items={state.items} />
     </div>
   );
 }
