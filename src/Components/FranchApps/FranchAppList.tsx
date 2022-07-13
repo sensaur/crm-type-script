@@ -79,12 +79,9 @@ function FranchAppList(props: any) {
                 />
               </td>
               <td className="text-center tableItem">
-                {/* <Link to={`/franchising/${item.id}`} target="_blank" itemID={item.id}> */}
                 {item.id}
-                {/* </Link> */}
               </td>
               <td className="text-center tableItem">
-                {/* <Link to={`/franchising/${item.id}`} target="_blank"> */}
                 {/*   <Link to={`/franchising/${item.id}`}> */}
                 {moment(item.created).format('DD.MM.YY HH:mm')}
                 {/* </Link> */}

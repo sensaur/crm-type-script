@@ -1,74 +1,70 @@
-.badge-purple {
-    background-color: #873bda;
-}
-
-.badge-order {
-    background-color: #25c111;
-}
-
-.badge-brown {
-    background-color: #b37e30;
-}
-
-.badge-blue {
-    background-color: cornflowerblue;
-}
-
-.badge-red {
-    background-color: red;
-}
-
-.badge-green {
-    background-color: #2a9c52;
-}
-
-.badge-gray {
-    background-color: #929292;
-}
-
-.badge-pink {
-    background-color: #f800ac;
-}
-
-.badge-orange {
-    background-color: #ff7100;
-}
-
 .badge-pill {
     padding-right: 0.6em;
     padding-left: 0.6em;
 }
 
-.badge-pill {
-    padding-right: 0.6em;
-    padding-left: 0.6em; }
+.badge-purple {
+    background-color: hsl(269, 68%, 54%);
+}
+
+.badge-order {
+    background-color: hsl(113, 84%, 41%);
+}
+
+.badge-brown {
+    background-color: hsl(36, 58%, 45%);
+}
+
+.badge-blue {
+    background-color: hsl(219, 79%, 66%);
+}
+
+.badge-red {
+    background-color: hsl(0, 100%, 50%);
+}
+
+.badge-green {
+    background-color: hsl(141, 58%, 39%);
+}
+
+.badge-gray {
+    background-color: hsl(0, 0%, 57%);
+}
+
+.badge-pink {
+    background-color: hsl(318, 100%, 49%);
+}
+
+.badge-orange {
+    background-color: hsl(27, 100%, 50%);
+}
 
 .badge-default {
-    background-color: #b0bec5; }
+    background-color: hsl(200, 15%, 73%); }
 .badge-default[href]:focus, .badge-default[href]:hover {
-    background-color: #93a6af; }
+    background-color: hsl(200, 15%, 63%); }
 
 .badge-primary {
-    background-color: #20a8d8; }
+    background-color: hsl(196, 75%, 49%); }
 .badge-primary[href]:focus, .badge-primary[href]:hover {
-    background-color: #1985ac; }
+    background-color: hsl(196, 75%, 39%); }
 
 .badge-success {
-    background-color: #4dbd74; }
+    background-color: hsl(141, 46%, 52%); }
 .badge-success[href]:focus, .badge-success[href]:hover {
-    background-color: #3a9d5d; }
+    background-color: hsl(141, 46%, 42%); }
 
 .badge-info {
-    background-color: #63c2de; }
+    background-color: hsl(194, 65%, 63%); }
 .badge-info[href]:focus, .badge-info[href]:hover {
-    background-color: #39b2d5; }
+    background-color: hsl(194, 65%, 53%); }
 
 .badge-warning {
-    background-color: #f8cb00; }
+    background-color: hsl(49, 100%, 49%); }
 .badge-warning[href]:focus, .badge-warning[href]:hover {
-    background-color: #c5a100; }
+    background-color: hsl(49, 100%, 39%); }
 
 .badge-danger {
-    background-color: #f86c6b; }
+    background-color: hsl(0, 91%, 70%); }
 .badge-danger[href]:focus, .badge-danger[href]:hover {
-    background-color: #f63c3a; }
+    background-color: hsl(0, 91%, 60%); }
