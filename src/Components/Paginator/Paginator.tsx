@@ -8,7 +8,7 @@ function Paginator(props: any) {
   // console.log('props===>', props);
   // console.log('ReactPaginate==>', ReactPaginate);
   const {
-    perPage, total, onPageChange,
+    perPage, total, onPageChange, curPage,
   } = props;
   // console.log('initialPage==>', initialPage);
   // const perPage2 = Number.isInteger(perPage) ? perPage : ITEMS_PER_PAGE;
@@ -21,7 +21,7 @@ function Paginator(props: any) {
   // console.log('total=>', total);
   return (
     <>
-      <div className="">Пагинатор</div>
+      <div className="">{`стр ${curPage} из ${Math.ceil(total / ITEMS_PER_PAGE)}`}</div>
       <ReactPaginate
         previousLabel="<"
         previousClassName="page-item"

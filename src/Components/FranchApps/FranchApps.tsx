@@ -76,6 +76,7 @@ function FranchApps() {
           onPageChange={handlePageChange}
           forcePage={0}
           initialPage={page - 1}
+          curPage={page}
         />
       </div>
       <FranchAppList items={items} />
