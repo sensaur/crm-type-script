@@ -53,7 +53,7 @@ const FRANCHAISE_STATUS_CLASS = {
 function FranchAppList(props: any) {
   const { items } = props;
   return (
-    <div style={{ width: '100%' }}>
+    <div className="container-fluid">
       <table className="table table-striped table-hover table-sm">
         <thead>
           <tr>
@@ -100,7 +100,7 @@ function FranchAppList(props: any) {
                   : <span className="badge badge-default badge-pill">не задан</span>}
               </td>
               <td className="text-center tableItem">
-                {Object.prototype.hasOwnProperty.call(FRANCHAISE_SOURCE, item.source)
+                {(FRANCHAISE_SOURCE[item?.source as keyof typeof FRANCHAISE_SOURCE])
                   ? <span>{FRANCHAISE_SOURCE[item.source as keyof typeof FRANCHAISE_SOURCE]}</span>
                   : <span className="badge badge-default badge-pill">не задан</span>}
               </td>

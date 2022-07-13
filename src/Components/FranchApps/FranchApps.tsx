@@ -3,6 +3,7 @@ import axios, { AxiosResponse } from 'axios';
 import FranchAppList from './FranchAppList';
 import { FRANCH } from '../../urls/urls';
 import { getCurrentOfficeId, getTokenFromLocalStorage } from '../../auth/auth';
+import Paginator from '../Paginator/Paginator';
 
 // interface FranchItem {
 //   id: number
@@ -19,9 +20,10 @@ import { getCurrentOfficeId, getTokenFromLocalStorage } from '../../auth/auth';
 function FranchApps() {
   const [state, setState] = useState({
     items: [],
-    filter: '&country=russia',
+    // filter: '&country=russia',
+    filter: '',
     page: 1,
-    count: 0,
+    count: 1,
     selected: [],
     isSuccess: false,
     isLoading: false,
@@ -31,6 +33,7 @@ function FranchApps() {
   });
 
   const fetchFranchApps = async () => {
+    // console.log('state.page=>', state.page);
     const response: AxiosResponse = await axios(`${FRANCH}?${state.filter}&page=${state.page}`, {
       headers: {
         Accept: 'application/json',
@@ -47,18 +50,36 @@ function FranchApps() {
   // const handleFilter = (filter: any) => {
   //   setState((prev: any) => ({ ...prev, filter }));
   // };
+
+  const handlePageChange = (data: any) => {
+    console.log('data.selected==>', data.selected);
+    setState((prev: any) => ({ ...prev, page: data.selected + 1 }));
+    // return data.selected + 1;
+    // this.fetchFranchiseApplications(data.selected + 1);
+  };
+
   useEffect(() => {
     fetchFranchApps();
-  }, []);
+  }, [state.page]);
   // console.log(handleFilter);
+
+  const { count, page } = state;
   return (
-    <div className="container-fluid">
-      <h3>
-        Всего:&nbsp;
-        {state.count}
-      </h3>
+    <>
+      <div className="container-fluid d-flex justify-content-between">
+        <h3>
+          Всего:&nbsp;
+          {count}
+        </h3>
+        <Paginator
+          total={count}
+          onPageChange={handlePageChange}
+          forcePage={0}
+          initialPage={page - 1}
+        />
+      </div>
       <FranchAppList items={state.items} />
-    </div>
+    </>
   );
 }
 
