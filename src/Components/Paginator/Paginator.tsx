@@ -32,7 +32,7 @@ function Paginator(props: any) {
         nextClassName="page-item"
         nextLinkClassName="page-link"
         pageCount={total === 0 ? 1 : Math.ceil(total / ITEMS_PER_PAGE)}
-        containerClassName="pagination"
+        containerClassName="pagination my-1"
         pageClassName="page-item"
         pageLinkClassName="page-link"
         onPageChange={onPageChange}

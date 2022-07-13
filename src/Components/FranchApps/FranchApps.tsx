@@ -23,7 +23,7 @@ function FranchApps() {
     // filter: '&country=russia',
     filter: '',
     page: 1,
-    count: 1,
+    count: '',
     selected: [],
     isSuccess: false,
     isLoading: false,
@@ -63,14 +63,14 @@ function FranchApps() {
   }, [state.page]);
   // console.log(handleFilter);
 
-  const { count, page } = state;
+  const { count, page, items } = state;
   return (
     <>
-      <div className="container-fluid d-flex justify-content-between">
-        <h3>
+      <div className="container-fluid d-flex justify-content-between align-items-center">
+        <h5>
           Всего:&nbsp;
           {count}
-        </h3>
+        </h5>
         <Paginator
           total={count}
           onPageChange={handlePageChange}
@@ -78,7 +78,7 @@ function FranchApps() {
           initialPage={page - 1}
         />
       </div>
-      <FranchAppList items={state.items} />
+      <FranchAppList items={items} />
     </>
   );
 }
