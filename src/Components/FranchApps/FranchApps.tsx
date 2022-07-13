@@ -20,7 +20,6 @@ import Paginator from '../Paginator/Paginator';
 function FranchApps() {
   const [state, setState] = useState({
     items: [],
-    // filter: '&country=russia',
     filter: '',
     page: 1,
     count: '',
@@ -33,7 +32,6 @@ function FranchApps() {
   });
 
   const fetchFranchApps = async () => {
-    // console.log('state.page=>', state.page);
     const response: AxiosResponse = await axios(`${FRANCH}?${state.filter}&page=${state.page}`, {
       headers: {
         Accept: 'application/json',
@@ -41,7 +39,6 @@ function FranchApps() {
         office: getCurrentOfficeId(),
       },
     });
-    // console.log(response.data);
     setState((prev: any) => (
       { ...prev, items: response.data.results, count: response.data.count }
     ));
@@ -54,14 +51,11 @@ function FranchApps() {
   const handlePageChange = (data: any) => {
     console.log('data.selected==>', data.selected);
     setState((prev: any) => ({ ...prev, page: data.selected + 1 }));
-    // return data.selected + 1;
-    // this.fetchFranchiseApplications(data.selected + 1);
   };
 
   useEffect(() => {
     fetchFranchApps();
   }, [state.page]);
-  // console.log(handleFilter);
 
   const { count, page, items } = state;
   return (

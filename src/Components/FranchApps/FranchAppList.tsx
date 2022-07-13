@@ -1,7 +1,7 @@
 import moment from 'moment';
 import './FranchApp.css';
 
-const FRANCHAISE_STATUS = {
+const FRANCH_STATUS = {
   deciding: 'новая',
   franchasing: 'франчайзинг',
   subagent: 'субагент',
@@ -20,7 +20,13 @@ const FRANCHAISE_STATUS = {
   freelancer: 'фрилансер',
 };
 
-const FRANCHAISE_SOURCE = {
+const FRANCH_COUNTRIES = {
+  russia: 'Россия',
+  kazakhstan: 'Казахстан',
+  belorussia: 'Белоруссия',
+};
+
+const FRANCH_SOURCE = {
   odnoklassniki: 'одноклассники',
   lead_from_site: 'заявка с сайта',
   VK: 'в контакте',
@@ -31,7 +37,7 @@ const FRANCHAISE_SOURCE = {
   yandex: 'контекстная Яндекс',
 };
 
-const FRANCHAISE_STATUS_CLASS = {
+const FRANCH_STATUS_CLASS = {
   new: 'badge-danger',
   deciding: 'badge-danger',
   franchasing: 'badge-success',
@@ -87,18 +93,18 @@ function FranchAppList(props: any) {
                 {/* </Link> */}
               </td>
               <td className="text-center tableItem">
-                {Object.prototype.hasOwnProperty.call(FRANCHAISE_STATUS, item.status) ? (
+                {Object.prototype.hasOwnProperty.call(FRANCH_STATUS, item.status) ? (
                   <span
-                    className={`badge badge-pill ${FRANCHAISE_STATUS_CLASS[item.status as keyof typeof FRANCHAISE_STATUS_CLASS]}`}
+                    className={`badge badge-pill ${FRANCH_STATUS_CLASS[item.status as keyof typeof FRANCH_STATUS_CLASS]}`}
                   >
-                    {FRANCHAISE_STATUS[item.status as keyof typeof FRANCHAISE_STATUS]}
+                    {FRANCH_STATUS[item.status as keyof typeof FRANCH_STATUS]}
                   </span>
                 )
                   : <span className="badge badge-default badge-pill">не задан</span>}
               </td>
               <td className="text-center tableItem">
-                {(FRANCHAISE_SOURCE[item?.source as keyof typeof FRANCHAISE_SOURCE])
-                  ? <span>{FRANCHAISE_SOURCE[item.source as keyof typeof FRANCHAISE_SOURCE]}</span>
+                {(FRANCH_SOURCE[item?.source as keyof typeof FRANCH_SOURCE])
+                  ? <span>{FRANCH_SOURCE[item.source as keyof typeof FRANCH_SOURCE]}</span>
                   : <span className="badge badge-default badge-pill">не задан</span>}
               </td>
               <td className="text-center tableItem">
@@ -119,7 +125,13 @@ function FranchAppList(props: any) {
                 {/* {item.office.city.name} */}
               </td>
               <td className="text-center tableItem">
-                {item.applicant.country}
+                {(FRANCH_COUNTRIES[item?.applicant.country as keyof typeof FRANCH_COUNTRIES])
+                  ? (
+                    <span>
+                      {FRANCH_COUNTRIES[item?.applicant.country as keyof typeof FRANCH_COUNTRIES]}
+                    </span>
+                  )
+                  : <span className="badge badge-default badge-pill">не задан</span>}
               </td>
               <td className="text-center tableItem">
                 {item.manager ? `${item.manager.last_name} ${item.manager.first_name}` : ''}

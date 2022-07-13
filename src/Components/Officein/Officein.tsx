@@ -49,7 +49,7 @@ function Officein() {
       });
       setState((prev: ArrayObjectSelectState) => ({ ...prev, offices: response?.data || [] }));
     } catch (error: any) {
-      swal(JSON.stringify(error.response.data));
+      await swal(JSON.stringify(error.response.data));
       console.error('error', error);
       deauthenticateUser();
       navigate('/login');

@@ -41,30 +41,36 @@
 
 .badge-default {
     background-color: hsl(200, 15%, 73%); }
+
 .badge-default[href]:focus, .badge-default[href]:hover {
     background-color: hsl(200, 15%, 63%); }
 
 .badge-primary {
     background-color: hsl(196, 75%, 49%); }
+
 .badge-primary[href]:focus, .badge-primary[href]:hover {
     background-color: hsl(196, 75%, 39%); }
 
 .badge-success {
     background-color: hsl(141, 46%, 52%); }
+
 .badge-success[href]:focus, .badge-success[href]:hover {
     background-color: hsl(141, 46%, 42%); }
 
 .badge-info {
     background-color: hsl(194, 65%, 63%); }
+
 .badge-info[href]:focus, .badge-info[href]:hover {
     background-color: hsl(194, 65%, 53%); }
 
 .badge-warning {
     background-color: hsl(49, 100%, 49%); }
+
 .badge-warning[href]:focus, .badge-warning[href]:hover {
     background-color: hsl(49, 100%, 39%); }
 
 .badge-danger {
     background-color: hsl(0, 91%, 70%); }
+
 .badge-danger[href]:focus, .badge-danger[href]:hover {
     background-color: hsl(0, 91%, 60%); }

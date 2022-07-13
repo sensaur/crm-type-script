@@ -61,7 +61,6 @@ export function getTokenFromLocalStorage() {
 }
 
 export function getCurrentOfficeFromLocalStorage() {
-  // console.log(localStorage.getItem(CURRENT_USER_OFFICE));
   return localStorage.getItem(CURRENT_USER_OFFICE);
 }
 
@@ -155,6 +154,5 @@ export function getCurrentOfficeData() {
   if (typeof officeData !== 'object' || !officeData) {
     return {};
   }
-
   return officeData;
 }
