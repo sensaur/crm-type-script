@@ -1,4 +1,5 @@
-function FranchAppList() {
+function FranchAppList(props: any) {
+  console.log(props);
   return (
     <table className="table">
       <thead>

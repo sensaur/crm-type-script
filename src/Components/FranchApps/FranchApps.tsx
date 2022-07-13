@@ -4,6 +4,18 @@ import FranchAppList from './FranchAppList';
 import { FRANCH } from '../../urls/urls';
 import { getCurrentOfficeId, getTokenFromLocalStorage } from '../../auth/auth';
 
+// interface FranchItem {
+//   id: number
+//   username: string
+//   first_name: string,
+//   last_name: string
+//   email: string
+// }
+//
+// interface FranchProps {
+//   items: FranchItem[];
+// }
+
 function FranchApps() {
   const [state, setState] = useState({
     items: [],
@@ -17,7 +29,8 @@ function FranchApps() {
     isShowForm: false,
     errors: null,
   });
-  const fetchFranchiseApplications = async () => {
+
+  const fetchFranchApps = async () => {
     const response: AxiosResponse = await axios(`${FRANCH}?${state.filter}&page=${state.page}`, {
       headers: {
         Accept: 'application/json',
@@ -26,14 +39,25 @@ function FranchApps() {
       },
     });
     console.log(response.data);
-    setState((prev: any) => ({ ...prev, items: response.data.results }));
+    setState((prev: any) => (
+      { ...prev, items: response.data.results, count: response.data.count }
+    ));
     return response.data;
   };
-  useEffect(() => { fetchFranchiseApplications(); }, []);
+  const handleFilter = (filter: any) => {
+    setState((prev: any) => ({ ...prev, filter }));
+  };
+  useEffect(() => {
+    fetchFranchApps();
+  }, []);
+  console.log(handleFilter);
   return (
     <div className="container-fluid">
-      <h1>Франч</h1>
-      <FranchAppList />
+      <h3>
+        Всего:&nbsp;
+        {state.count}
+      </h3>
+      <FranchAppList props={state.items} />
     </div>
   );
 }
