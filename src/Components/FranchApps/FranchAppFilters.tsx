@@ -34,27 +34,23 @@ function FranchAppFilters(props: any) {
   const { isFiltersShown } = props;
   const filters: any = () => (
     <div className="container-fluid">
-      <form action="" onSubmit={submitHandler}>
-        <div
-          className="col-md-12 py-1"
+      <form action="" className="d-flex align-items-center" onSubmit={submitHandler}>
+        <Select
+          className="py-2 px-4"
+          value={state.selectedCountry}
+          getOptionLabel={(country: Country) => country.label}
+          getOptionValue={(country: Country) => country.value}
+          options={FRANCHAISE_COUNTRY_OPTIONS}
+          isClearable
+          backspaceRemovesValue
+          onChange={inputHandler}
+        />
+        <button
+          type="submit"
+          className="btn btn-primary px-4"
         >
-          <Select
-            className="py-2"
-            value={state.selectedCountry}
-            getOptionLabel={(country: Country) => country.label}
-            getOptionValue={(country: Country) => country.value}
-            options={FRANCHAISE_COUNTRY_OPTIONS}
-            isClearable
-            backspaceRemovesValue
-            onChange={inputHandler}
-          />
-          <button
-            type="submit"
-            className="btn btn-primary px-4"
-          >
-            Найти
-          </button>
-        </div>
+          Найти
+        </button>
       </form>
     </div>
   );

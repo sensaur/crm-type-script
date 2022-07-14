@@ -40,7 +40,7 @@ function FranchApps() {
   // };
 
   const handlePageChange = (data: any) => {
-    console.log('data.selected==>', data.selected);
+    // console.log('data.selected==>', data.selected);
     setState((prev: any) => ({ ...prev, page: data.selected + 1 }));
   };
 
@@ -49,7 +49,7 @@ function FranchApps() {
   }, [state.page]);
 
   const handleShowFilters = () => {
-    console.log(state.isFiltersShown);
+    // console.log(state.isFiltersShown);
     setState((prev: any) => ({ ...prev, isFiltersShown: !state.isFiltersShown }));
   };
 
