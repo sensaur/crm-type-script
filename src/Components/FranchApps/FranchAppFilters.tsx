@@ -1,48 +1,52 @@
 import Select from 'react-select';
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 
-interface Office {
-  address: string
-  fp_type: string
-  id: number
-  name: string
+interface Country {
+  label: string
+  value: string
 }
 
 interface ArrayObjectSelectState {
-  selectedOffice: Office | null
+  selectedCountry: Country | null
   offices: []
 }
 
+const FRANCHAISE_COUNTRY_OPTIONS = [
+  { label: 'Россия', value: 'russia' },
+  { label: 'Казахстан', value: 'kazakhstan' },
+  { label: 'Беларусь', value: 'belorussia' },
+];
+
 function FranchAppFilters(props: any) {
   const [state, setState] = useState<ArrayObjectSelectState>({
-    selectedOffice: null,
+    selectedCountry: null,
     offices: [],
   });
 
-  const handleSubmit = () => {
-    console.log(111);
+  const submitHandler = (e: FormEvent) => {
+    e.preventDefault();
+    console.log(e);
   };
-  const handleChange = () => {
-    console.log(222);
+  const inputHandler = (option: Country | null) => {
+    console.log(option);
+    setState((prev: ArrayObjectSelectState) => ({ ...prev, selectedCountry: option }));
   };
-  const { offices } = state;
   const { isFiltersShown } = props;
-  console.log(setState);
   const filters: any = () => (
     <div className="container-fluid">
-      <form action="" onSubmit={handleSubmit}>
+      <form action="" onSubmit={submitHandler}>
         <div
           className="col-md-12 py-1"
         >
           <Select
             className="py-2"
-            value={state.selectedOffice}
-            getOptionLabel={(office: Office) => office.address}
-            getOptionValue={(office: Office) => office.address}
-            options={offices}
+            value={state.selectedCountry}
+            getOptionLabel={(country: Country) => country.label}
+            getOptionValue={(country: Country) => country.value}
+            options={FRANCHAISE_COUNTRY_OPTIONS}
             isClearable
             backspaceRemovesValue
-            onChange={handleChange}
+            onChange={inputHandler}
           />
           <button
             type="submit"
