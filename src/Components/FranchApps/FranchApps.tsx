@@ -4,6 +4,8 @@ import FranchAppList from './FranchAppList';
 import { FRANCH } from '../../urls/urls';
 import { getCurrentOfficeId, getTokenFromLocalStorage } from '../../auth/auth';
 import Paginator from '../Paginator/Paginator';
+import FranchAppFilterButton from './FranchAppFilterButton';
+import FranchAppFilters from './FranchAppFilters';
 
 // interface FranchItem {
 //   id: number
@@ -29,6 +31,7 @@ function FranchApps() {
     isAction: false,
     isShowForm: false,
     errors: null,
+    isFiltersShown: false,
   });
 
   const fetchFranchApps = async () => {
@@ -57,7 +60,14 @@ function FranchApps() {
     fetchFranchApps();
   }, [state.page]);
 
-  const { count, page, items } = state;
+  const handleShowFilters = () => {
+    console.log(state.isFiltersShown);
+    setState((prev: any) => ({ ...prev, isFiltersShown: !state.isFiltersShown }));
+  };
+
+  const {
+    count, page, items, isFiltersShown,
+  } = state;
   return (
     <>
       <div className="container-fluid d-flex justify-content-between align-items-center">
@@ -65,6 +75,10 @@ function FranchApps() {
           Всего:&nbsp;
           {count}
         </h5>
+        <FranchAppFilterButton
+          isFiltersShown={isFiltersShown}
+          handleShowFilters={handleShowFilters}
+        />
         <Paginator
           total={count}
           onPageChange={handlePageChange}
@@ -73,6 +87,9 @@ function FranchApps() {
           curPage={page}
         />
       </div>
+      <FranchAppFilters
+        isFiltersShown={isFiltersShown}
+      />
       <FranchAppList items={items} />
     </>
   );
