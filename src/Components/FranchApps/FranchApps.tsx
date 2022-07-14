@@ -7,18 +7,6 @@ import Paginator from '../Paginator/Paginator';
 import FranchAppFilterButton from './FranchAppFilterButton';
 import FranchAppFilters from './FranchAppFilters';
 
-// interface FranchItem {
-//   id: number
-//   username: string
-//   first_name: string,
-//   last_name: string
-//   email: string
-// }
-//
-// interface FranchProps {
-//   items: FranchItem[];
-// }
-
 function FranchApps() {
   const [state, setState] = useState({
     items: [],
