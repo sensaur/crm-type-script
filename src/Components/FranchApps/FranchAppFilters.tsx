@@ -38,6 +38,7 @@ function FranchAppFilters(props: any) {
         <Select
           className="py-2 px-4"
           value={state.selectedCountry}
+          placeholder="Страна"
           getOptionLabel={(country: Country) => country.label}
           getOptionValue={(country: Country) => country.value}
           options={FRANCHAISE_COUNTRY_OPTIONS}
