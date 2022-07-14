@@ -70,26 +70,35 @@ function FranchApps() {
   } = state;
   return (
     <>
-      <div className="container-fluid d-flex justify-content-between align-items-center">
-        <h5>
-          Всего:&nbsp;
-          {count}
-        </h5>
-        <FranchAppFilterButton
+      {/* <div className="container-fluid d-flex justify-content-between align-items-center"> */}
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col">
+            <h5>
+              Всего:&nbsp;
+              {count}
+            </h5>
+          </div>
+          <div className="col">
+            <FranchAppFilterButton
+              isFiltersShown={isFiltersShown}
+              handleShowFilters={handleShowFilters}
+            />
+          </div>
+          <div className="col">
+            <Paginator
+              total={count}
+              onPageChange={handlePageChange}
+              forcePage={0}
+              initialPage={page - 1}
+              curPage={page}
+            />
+          </div>
+        </div>
+        <FranchAppFilters
           isFiltersShown={isFiltersShown}
-          handleShowFilters={handleShowFilters}
-        />
-        <Paginator
-          total={count}
-          onPageChange={handlePageChange}
-          forcePage={0}
-          initialPage={page - 1}
-          curPage={page}
         />
       </div>
-      <FranchAppFilters
-        isFiltersShown={isFiltersShown}
-      />
       <FranchAppList items={items} />
     </>
   );

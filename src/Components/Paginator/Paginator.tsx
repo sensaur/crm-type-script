@@ -8,8 +8,8 @@ function Paginator(props: any) {
   } = props;
 
   return (
-    <>
-      <div className="">{`стр ${curPage} из ${Math.ceil(total / ITEMS_PER_PAGE)}`}</div>
+    <div className="d-flex align-items-center">
+      <div className="px-2">{`стр ${curPage} из ${Math.ceil(total / ITEMS_PER_PAGE)}`}</div>
       <ReactPaginate
         previousLabel="<"
         previousClassName="page-item"
@@ -26,7 +26,7 @@ function Paginator(props: any) {
         onPageChange={onPageChange}
         activeClassName="active"
       />
-    </>
+    </div>
   );
 }
 
